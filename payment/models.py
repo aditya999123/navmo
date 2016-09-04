@@ -8,7 +8,7 @@ class payment_data(models.Model):
     amount=models.CharField(max_length=120,blank=True,null=True)
     flag=models.PositiveSmallIntegerField(default=0)
     domain_type=models.PositiveSmallIntegerField(default=0)
-    last_transaction=models.PositiveSmallIntegerField(default=0)
+    last_transaction_id=models.PositiveSmallIntegerField(default=0)
 
 class domain_data(models.Model):
 	domain_type=models.PositiveSmallIntegerField(default=0)

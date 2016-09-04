@@ -1,11 +1,44 @@
 <html>
-<head><title>register</title>
-</head>
-<body>
-	<form action="." method="post">{% csrf_token %}
-		<table>
-		<tr><td><input type="submit" name="ok" value ="enter"/></td></tr>
-		</table>
-	</form>
-</body>
+  <head onload="submitPayuForm()">
+  <script type="text/javascript">
+    var hash = "{{ hash }}";
+    function submitPayuForm() {
+      if(hash =='') {
+        return;
+      }
+      var payuForm = document.forms.payuForm;
+      payuForm.submit();
+    }
+  </script>
+  </head>
+  <body>
+    <h2>PayU Form</h2>
+    <br/>
+    {% if error %}
+	
+      <span style="color:red">Please fill all mandatory fields.</span>
+      <br/>
+      <br/>
+      {% endif %}
+     
+      <form action="https://test.payu.in/_payment" method="post" name="payuForm">
+      <input type="hidden" name="key" value="{{ key }}" />
+      <input type="hidden" name="txnid" value="{{ txnid }}" />
+      <input type="hidden" name="amount" value="{{ amount }}"/>
+       <input type="hidden" name="posted" value="{{ posted }}"/>
+      <input type="hidden" name="productinfo" value="{{ productinfo }}" />
+      <input type="hidden" name="firstname" value="{{ firstname }}" />
+      <input type="hidden" name="email" value="{{ email }}" />
+      <input type="hidden" name="phone" value="{{ phone }}" />
+      <input type="hidden" name="surl" value="{{ surl }}" />
+      <input type="hidden" name="furl" value="{{ furl }}" />
+      <input type="hidden" name="hash" value="{{ hash }}" />
+      <input type="hidden" name="service_provider" value="{{ service_provider }}" />
+      <input type="submit" value ="pay now">
+
+
+      
+    </form>
+  </body>
 </html>
+

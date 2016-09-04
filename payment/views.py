@@ -24,12 +24,7 @@ from django.core.urlresolvers import reverse
 @login_required
 def payment(request):
 	payment_data_row=payment_data.objects.get(refrence_id=str(request.user))
-	if (request.method=="GET"):
-		if(payment_data_row.flag==0):
-			return render(request,'payment/payment.html')
-		else:
-			return HttpResponseRedirect("/home")
-	if(request.method=="POST"):
+	if(payment_data_row.flag==0):
 		n=random.randint(11,99) 
 		domain_type=payment_data_row.domain_type
 		amount=domain_data.objects.get(domain_type=domain_type).amount
@@ -43,21 +38,18 @@ def payment(request):
 		firstname="aditya"
 		email="aditya999123@gmail.com"
 		phone="7587485272"
-		surl="http://127.0.0.1:8000/home/"
-		furl="http://127.0.0.1:8000/home/"
+		surl=request.scheme+"://"+request.get_host()+"/"+"payment_success"
+		furl=request.scheme+"://"+request.get_host()+"/"+"payment_faliure"
 		service_provider="payu_paisa"
-		udf1="a"
-		udf2="b"
-		udf3="c"
-		udf4="d"
-		udf5="e"
 		salt="wErVRybo"
 		test_salt='GQs7yium'
-		to_encode=key+'|'+txnid+'|'+amount+'|'+productinfo+'|'+firstname+'|'+email+'|||||||||||'+salt
+		test_key="fB7m8s"
+		test_salt="eRis5Chv"
+		to_encode=test_key+'|'+txnid+'|'+amount+'|'+productinfo+'|'+firstname+'|'+email+'|||||||||||'+test_salt
 		hex_dig=hashlib.sha512(to_encode).hexdigest().lower()
 		print to_encode
 		json={
-		"key":key,
+		"key":test_key,
 		'txnid':txnid,
 		"amount":amount,
 		"productinfo":productinfo,
@@ -73,36 +65,6 @@ def payment(request):
 		print json
 		url_test = 'https://test.payu.in/_payment'
 		url="https://secure.payu.in/_payment"
-		return HttpResponse(requests.post(url,json=json,data=json,headers=head))#HttpResponse ('aa')
-'''		
-def Home(request):
-	MERCHANT_KEY = "JBZaLc"
-	key="JBZaLc"
-	SALT = "GQs7yium"
-	PAYU_BASE_URL = "https://test.payu.in/_payment"
-	action = ''
-	posted={}
-	for i in request.POST:
-		posted[i]=request.POST[i]
-	hash_object = hashlib.sha256(b'randint(0,20)')
-	txnid=hash_object.hexdigest()[0:20]
-	hashh = ''
-	posted['txnid']=txnid
-	hashSequence = "key|txnid|amount|productinfo|firstname|email|udf1|udf2|udf3|udf4|udf5|udf6|udf7|udf8|udf9|udf10"
-	posted['key']=key
-	hash_string=''
-	hashVarsSeq=hashSequence.split('|')
-	for i in hashVarsSeq:
-		try:
-			hash_string+=str(posted[i])
-		except Exception:
-			hash_string+=''
-		hash_string+='|'
-	hash_string+=SALT
-	hashh=hashlib.sha512(hash_string).hexdigest().lower()
-	action =PAYU_BASE_URL
-	if(posted.get("key")!=None and posted.get("txnid")!=None and posted.get("productinfo")!=None and posted.get("firstname")!=None and posted.get("email")!=None):
-		return render_to_response('current_datetime.html',RequestContext(request,{"posted":posted,"hashh":hashh,"MERCHANT_KEY":MERCHANT_KEY,"txnid":txnid,"hash_string":hash_string,"action":"https://test.payu.in/_payment" }))
+		return render(request,'payment/payment.html',json)
 	else:
-		return render_to_response('current_datetime.html',RequestContext(request,{"posted":posted,"hashh":hashh,"MERCHANT_KEY":MERCHANT_KEY,"txnid":txnid,"hash_string":hash_string,"action":"." }))
-		'''
+		return HttpResponseRedirect("/home")
