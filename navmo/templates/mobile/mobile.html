@@ -1,0 +1,15 @@
+<html>
+<head><title>mobile</title>
+</head>
+<body>
+	{{error}}
+	 <form method="post" action=".">{% csrf_token %}
+		<table>
+		<tr><td>number<input type="text" name="number" value={{number}} disabled></input></td></tr>
+		<tr><td><input type="submit" name="send" value ="SEND"/></td></tr>
+		<tr><td>verification:code<input type="text" name="code"></input></td></tr>
+		<tr><td><input type="submit" name="verify" value ="VERIFY"/></td></tr>
+		</table>
+    </form>
+</body>
+</html>
