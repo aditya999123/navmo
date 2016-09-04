@@ -47,3 +47,5 @@ def verify_mobile(request):
 			else:
 				error_message="otp did not match Try Again"
 				return render(request,'mobile/mobile.html',{"number":otp_data_row.number,"error":error_message})
+def test(request):
+	return HttpResponse(requests.request('GET', 'http://google.co.in'))

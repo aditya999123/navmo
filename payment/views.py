@@ -25,7 +25,8 @@ from django.core.urlresolvers import reverse
 def payment(request):
 	payment_data_row=payment_data.objects.get(refrence_id=str(request.user))
 	if(payment_data_row.flag==0):
-		n=random.randint(11,99) 
+		n=random.randint(11,99)
+		user_data_row=user_data.objects.get(refrence_id=str(request.user))
 		domain_type=payment_data_row.domain_type
 		amount=domain_data.objects.get(domain_type=domain_type).amount
 		setattr(payment_data_row,'last_transaction_id',str(request.user)+str(n))
@@ -35,9 +36,9 @@ def payment(request):
 		txnid=str(request.user)+str(n)
 		amount=str(float(amount))
 		productinfo="domain_type"+str(domain_type)
-		firstname="aditya"
-		email="aditya999123@gmail.com"
-		phone="7587485272"
+		firstname=str(user_data_row.first_name)
+		email=str(user_data_row.email)
+		phone=str(user_data_row.number)
 		surl=request.scheme+"://"+request.get_host()+"/"+"payment_success"
 		furl=request.scheme+"://"+request.get_host()+"/"+"payment_faliure"
 		service_provider="payu_paisa"
