@@ -16,6 +16,9 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from register.views_register import registration,home,login_check,logout_page
+from register.views_register import logout_and_register
+from otp.views import verify_mobile
+from payment.views import payment
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$',home),
@@ -23,4 +26,8 @@ urlpatterns = [
     url(r'^register/$',registration ),
     url(r'^home/$',home ),
     url(r'^logout/$',logout_page ),
+    url(r'^logout_and_register/$',logout_and_register),
+    url(r'^payment/$',payment ),
+    url(r'^verify_mobile/$',verify_mobile ),
+
 ]

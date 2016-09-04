@@ -4,3 +4,7 @@ from .models import *
 class payment_dataAdmin(admin.ModelAdmin):
     list_display=["refrence_id","flag"]
 admin.site.register(payment_data,payment_dataAdmin)
+
+class domain_dataAdmin(admin.ModelAdmin):
+	list_display=["domain_type","name","amount"]
+admin.site.register(domain_data,domain_dataAdmin)
