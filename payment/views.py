@@ -69,3 +69,10 @@ def payment(request):
 		return render(request,'payment/payment.html',json)
 	else:
 		return HttpResponseRedirect("/home")
+@login_required
+def payment_success(request):
+	return "payment succesful"
+
+@login_required
+def payment_faliure(request):
+	return "payment failed"	
