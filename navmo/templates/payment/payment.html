@@ -21,7 +21,7 @@
       <br/>
       {% endif %}
      
-      <form action="https://test.payu.in/_payment" method="post" name="payuForm">
+      <form action="{{url}}" method="post" name="payuForm">
       <input type="hidden" name="key" value="{{ key }}" />
       <input type="hidden" name="txnid" value="{{ txnid }}" />
       <input type="hidden" name="amount" value="{{ amount }}"/>

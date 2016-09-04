@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_protect,csrf_exempt
 from django.shortcuts import render_to_response, render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
@@ -39,18 +39,15 @@ def payment(request):
 		firstname=str(user_data_row.first_name)
 		email=str(user_data_row.email)
 		phone=str(user_data_row.number)
-		surl=request.scheme+"://"+request.get_host()+"/"+"payment_success"
-		furl=request.scheme+"://"+request.get_host()+"/"+"payment_faliure"
+		surl=request.scheme+"://"+request.get_host()+"/"+"payment_success/"
+		furl=request.scheme+"://"+request.get_host()+"/"+"payment_faliure/"
 		service_provider="payu_paisa"
 		salt="wErVRybo"
-		test_salt='GQs7yium'
-		test_key="fB7m8s"
-		test_salt="eRis5Chv"
-		to_encode=test_key+'|'+txnid+'|'+amount+'|'+productinfo+'|'+firstname+'|'+email+'|||||||||||'+test_salt
+		to_encode=key+'|'+txnid+'|'+amount+'|'+productinfo+'|'+firstname+'|'+email+'|||||||||||'+salt
 		hex_dig=hashlib.sha512(to_encode).hexdigest().lower()
 		print to_encode
 		json={
-		"key":test_key,
+		"key":key,
 		'txnid':txnid,
 		"amount":amount,
 		"productinfo":productinfo,
@@ -61,6 +58,7 @@ def payment(request):
 		"furl":furl,
 		"service_provider":service_provider,
 		"hash":str(hex_dig),
+		"url":"https://secure.payu.in/_payment",
 		}
 		head={"Authorization": "Egmegr2N2HD0Y7rBRcU3GQRuzMH9BZ0z05HZIkex/lo="} 
 		print json
@@ -70,9 +68,53 @@ def payment(request):
 	else:
 		return HttpResponseRedirect("/home")
 @login_required
+@csrf_exempt
 def payment_success(request):
-	return "payment succesful"
+	status=request.POST["status"]
+	firstname=request.POST["firstname"]
+	amount=request.POST["amount"]
+	txnid=request.POST["txnid"]
+	posted_hash=request.POST["hash"]
+	key=request.POST["key"]
+	productinfo=request.POST["productinfo"]
+	email=request.POST["email"]
+	salt="wErVRybo"
+	try:
+		additionalCharges=request.POST["additionalCharges"]
+		retHashSeq=additionalCharges+'|'+salt+'|'+status+'|||||||||||'+email+'|'+firstname+'|'+productinfo+'|'+amount+'|'+txnid+'|'+key
+	except Exception:
+		retHashSeq = salt+'|'+status+'|||||||||||'+email+'|'+firstname+'|'+productinfo+'|'+amount+'|'+txnid+'|'+key
+	hashh=hashlib.sha512(retHashSeq).hexdigest().lower()
+	if(hashh !=posted_hash):
+		status='Invalid Transaction'
+	payment_data_row=payment_data.objects.get(refrence_id=str(request.user))
+
+	if(status==1):
+		setattr(payment_data_row,'flag',1)
+		payment_data_row.save()	
+	return render(request,'payment/success.html',{"txnid":txnid,"status":status,"amount":amount})
+
 
 @login_required
+@csrf_exempt
 def payment_faliure(request):
-	return "payment failed"	
+	status=request.POST["status"]
+	firstname=request.POST["firstname"]
+	amount=request.POST["amount"]
+	txnid=request.POST["txnid"]
+	posted_hash=request.POST["hash"]
+	key=request.POST["key"]
+	productinfo=request.POST["productinfo"]
+	email=request.POST["email"]
+	salt="wErVRybo"
+	try:
+		additionalCharges=request.POST["additionalCharges"]
+		retHashSeq=additionalCharges+'|'+salt+'|'+status+'|||||||||||'+email+'|'+firstname+'|'+productinfo+'|'+amount+'|'+txnid+'|'+key
+	except Exception:
+		retHashSeq = salt+'|'+status+'|||||||||||'+email+'|'+firstname+'|'+productinfo+'|'+amount+'|'+txnid+'|'+key
+	hashh=hashlib.sha512(retHashSeq).hexdigest().lower()
+	if(hashh !=posted_hash):
+		status='Invalid Transaction. Please try again'
+	return render(request,"payment/failure.html",{"txnid":txnid,"status":status,"amount":amount})
+
+	

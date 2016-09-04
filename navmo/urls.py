@@ -18,7 +18,7 @@ from django.contrib import admin
 from register.views_register import registration,home,login_check,logout_page
 from register.views_register import logout_and_register
 from otp.views import verify_mobile,test
-from payment.views import payment
+from payment.views import payment,payment_faliure,payment_success
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$',home),
@@ -30,5 +30,10 @@ urlpatterns = [
     url(r'^payment/$',payment ),
     url(r'^verify_mobile/$',verify_mobile ),
     url(r'^test/$',test),
+    url(r'^payment_faliure/$',payment_faliure),
+    url(r'^payment_success/$',payment_success),
 
 ]
+from django.conf import settings
+from django.conf.urls.static import static
+urlpatterns+=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

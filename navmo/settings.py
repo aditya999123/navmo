@@ -26,7 +26,6 @@ SECRET_KEY = '-pvvmb(2t%tfvxhkqftpt%u4&bihrow!+ic9&$3k42yi_lmtg='
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -120,5 +119,10 @@ django.contrib.auth.LOGIN_URL = '/login'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
-
+import os
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    '/var/www/static/',
+]
 STATIC_URL = '/static/'
+#STATIC_ROOT = os.path.join(BASE_DIR, "static")
