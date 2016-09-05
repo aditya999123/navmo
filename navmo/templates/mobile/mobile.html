@@ -2,6 +2,9 @@
 <head><title>mobile</title>
 </head>
 <body>
+{% include "base_head.html" %}
+{% block content %}
+
 	{{error}}
 	Pls verify you mobile before procceding
 	 <form method="post" action=".">{% csrf_token %}
@@ -12,5 +15,7 @@
 		<tr><td><input type="submit" name="verify" value ="VERIFY"/></td></tr>
 		</table>
     </form>
+{% endblock content %}
+{% include "base_foot.html" %}
 </body>
 </html>

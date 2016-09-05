@@ -1,10 +1,77 @@
-<html>
-<head><title>register</title>
-</head>
-<body>
-	<a href="/login">login</a>
-	<a href="/contactus">contactus</a>
-	<a href="/register">register</a>
-	<a href="/aboutus">aboutus</a>
+{% include "base_head.html" %}
+{% block content %}
+<section class="slider_wrapper">
+  <div id="camera_wrap" class="">
+    <div data-src="/static/general/images/slide.jpg"></div>
+    <div data-src="/static/general/images/slide1.jpg"></div>
+    <div data-src="/static/general/images/slide2.jpg"></div>  
+  </div>  
+</section> 
+<!--=====================
+          Content
+======================-->
+<section id="content"><div class="ic">More Website Templates @ TemplateMonster.com - September22, 2014!</div>
+  <div class="container_12">
+    <div class="grid_3">
+      <div class="banner">
+       
+        <div class="maxheight"><img src="/static/general/images/icon1.png" alt=""></div>
+      </div>
+    </div>
+    <div class="grid_3">
+      <div class="banner">
+       
+        <div class="maxheight"><img src="/static/general/images/icon2.png" alt=""></div>
+      </div>
+    </div>
+<div class="grid_3">
+      <div class="banner">
+       
+        <div class="maxheight"><img src="/static/general/images/icon4.png" alt=""></div>
+      </div>
+    </div>
+    <div class="grid_3">
+      <div class="banner">
+        
+        <div class="maxheight"><img src="/static/general/images/icon3.png" alt=""></div>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+  <article class="block-1">
+    <div class="container_12">
+      <div class="grid_12">
+        <h2>AWARDS AND SCHOLARSHIP</h2>
+      </div>
+      <ul style="list-style-type:disc">
+<center><li>   Golds ,silver and bronze medals for group champion in school</li></center>
+<li>   golds medals to state champions</li>
+<li>   champion's Champion Trophy </li>
+<li>Maths Intellect Trophy</li>
+<li>Merit Certificates </li>
+<li>10 Best school Trophy </li>
+<li>participation certificates for every participants</li>
+<li>scholarship of excellence in abacus & vedic maths for top 100 students </li></ul>
+
+
+      </div>
+      <div class="clear"></div>
+    </div>
+  </article>
+  
+    </div>
+    <div class="clear"></div>
+  </div>
+  
+      <div class="clear"></div>
+    </div>
+  </article>
+</section>
+<!--==============================
+              footer
+=================================-->
+{% endblock content %}
+{% include "base_foot.html" %}
+<a href="#" id="toTop" class="fa fa-angle-up"></a>
 </body>
 </html>

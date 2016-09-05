@@ -12,6 +12,16 @@
     <!--<script type="text/javascript" src="/static/admin/js/jquery.main.js"></script>-->
 </head>
 <body>
+{% include "base_head.html" %}
+{% block content %}
+
+<section class="slider_wrapper">
+  <div id="camera_wrap" class="">
+    <div data-src="/static/general/images/slide.jpg"></div>
+    <div data-src="/static/general/images/slide1.jpg"></div>
+    <div data-src="/static/general/images/slide2.jpg"></div>  
+  </div>  
+</section> 
 	Mobile Verification done
     <form method="post" action=".">{% csrf_token %}
         Payment:<input type="submit" value="{{payment_status}}"/>
@@ -49,5 +59,7 @@
             
         
 	</div>
+{% endblock content %}
+{% include "base_foot.html" %}
 </body>
 </html>

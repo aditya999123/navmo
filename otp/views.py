@@ -22,7 +22,16 @@ def verify_mobile(request):
 	otp_data_row=otp_data.objects.get(refrence_id=str(request.user))
 	print otp_data_row.refrence_id
 	if(request.method=="GET"):
-		return render(request,'mobile/mobile.html',{"number":otp_data_row.number,"error":error_message})
+		json={"number":otp_data_row.number,"error":error_message}
+		if request.user.is_authenticated():
+			login_display='Logout'
+			log_url='logout'
+		else:
+			login_display='SignUp'
+			log_url='register'
+		json['login_display']=login_display,
+		json['log_url']=log_url
+		return render(request,'mobile/mobile.html',json)
 	if(request.method=="POST"):
 		if request.POST.get("send")=='SEND':
 			n=random.randint(1000,9999)
@@ -35,17 +44,34 @@ def verify_mobile(request):
 			url+='&message='+'Verification code is '+str(n)
 			url+='&sender=mNavmo&route=4'
 			print requests.request('GET', url)
-			return render(request,'mobile/mobile.html',{"number":otp_data_row.number,"error":error_message})
+			json={"number":otp_data_row.number,"error":error_message}
+			if request.user.is_authenticated():
+				login_display='Logout'
+				log_url='logout'
+			else:
+				login_display='SignUp'
+				log_url='register'
+				json['login_display']=login_display,
+				json['log_url']=log_url
+			return render(request,'mobile/mobile.html',json)
 		if request.POST.get("verify")=='VERIFY':
 			print"command in verify"
 			code_recived=request.POST.get("code")
 			print code_recived,otp_data_row.otp
+
 			if(int(code_recived)==int(otp_data_row.otp)):
 				setattr(otp_data_row,'flag',1)
 				otp_data_row.save()
 				return HttpResponseRedirect('/home')
 			else:
 				error_message="otp did not match Try Again"
-				return render(request,'mobile/mobile.html',{"number":otp_data_row.number,"error":error_message})
-def test(request):
-	return HttpResponse(requests.request('GET', 'http://google.co.in'))
+				json={"number":otp_data_row.number,"error":error_message}
+				if request.user.is_authenticated():
+					login_display='Logout'
+					log_url='logout'
+				else:
+					login_display='SignUp'
+					log_url='register'
+				json['login_display']=login_display,
+				json['log_url']=log_url
+				return render(request,'mobile/mobile.html',json)

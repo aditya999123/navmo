@@ -2,6 +2,9 @@
 <head><title>Success</title>
 </head>
 <body>
+{% include "base_head.html" %}
+{% block content %}
+
 {{status}}
 <br>
 {{txnid}}
@@ -9,5 +12,7 @@
 {{amount}}
 
 <a href="/">continue</a>
+{% endblock content %}
+{% include "base_foot.html" %}
 </body>
 </html>

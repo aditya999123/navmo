@@ -12,6 +12,9 @@
   </script>
   </head>
   <body>
+{% include "base_head.html" %}
+{% block content %}
+
     <h2>PayU Form</h2>
     <br/>
     {% if error %}
@@ -39,6 +42,8 @@
 
       
     </form>
+{% endblock content %}
+{% include "base_foot.html" %}
   </body>
 </html>
 

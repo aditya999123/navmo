@@ -2,11 +2,16 @@
 <head><title>register</title>
 </head>
 <body>
+{% include "base_head.html" %}
+{% block content %}
+
 	pls note the refrence number ,this token will be used for further logins
 	refrence_id:{{refrence_id}}
 	<a href="/">continue</a>
 	<form action="." method="post">{% csrf_token %}
 		
 	</form>
+{% endblock content %}
+{% include "base_foot.html" %}
 </body>
 </html>

@@ -24,7 +24,9 @@ def login_check(request):
 @csrf_protect
 def registration(request):	
 	if request.user.is_authenticated():
-		return HttpResponseRedirect('/logout_and_register/')
+		login_display='Logout'
+		log_url='logout'
+		return HttpResponseRedirect('/logout_and_register/',{'login_display':login_display,'log_url':log_url})
 	if(request.method=="GET"):
 		return render(request,'registration/registration.html')
 	if(request.method=="POST"):
@@ -85,6 +87,12 @@ def registration(request):
 			password=request.POST.get('password'),
 			email=email,
 			)
+		if request.user.is_authenticated():
+			login_display='Logout'
+			log_url='logout'
+		else:
+			login_display='SignUp'
+			log_url='register'
 
 		n=random.randint(1000,9999)
 		payment_data.objects.create(refrence_id=this_refrence_id,flag=0,amount=0,domain_type=int(exam_group))
@@ -92,12 +100,20 @@ def registration(request):
 		return render(request,
 			'message/message.html',
 			{
-			'message':'Please note the refrence id \n this will be used for user login'+str(int(user_data.objects.all().last().refrence_id))
+			'message':'Please note the refrence id \n this will be used for user login'+str(int(user_data.objects.all().last().refrence_id)),
+			'login_display':login_display,
+			'log_url':log_url
 			}
 			)
 
 @login_required
 def home(request):
+	if request.user.is_authenticated():
+		login_display='Logout'
+		log_url='logout'
+	else:
+		login_display='SignUp'
+		log_url='register'
 	if(otp_data.objects.get(refrence_id=str(request.user)).flag==1):
 		if(request.method=="POST"):
 			return HttpResponseRedirect("/payment/")
@@ -122,7 +138,10 @@ def home(request):
 	    'flag_mpe_student':user_data_row.flag_mpe_student,
 	    'flag_exam_group':user_data_row.flag_exam_group,
 	    'flag_exam_centre_1':user_data_row.flag_exam_centre_1,
-	    'flag_exam_centre_2':user_data_row.flag_exam_centre_2}
+	    'flag_exam_centre_2':user_data_row.flag_exam_centre_2,
+	    'login_display':login_display,
+	    'log_url':log_url
+	    }
 	    #as
 		if(payment_data.objects.get(refrence_id=str(request.user)).flag==1):
 			json['payment_status']="Check Status"
@@ -142,4 +161,10 @@ def logout_and_register(request):
 	return render(request,"message/message.html",{'message':"Pls Logout and register again"})
 
 def start(request):
-	return render(request,'start/start.html')
+	if request.user.is_authenticated():
+		login_display='Logout'
+		log_url='logout'
+	else:
+		login_display='SignUp'
+		log_url='register'
+	return render(request,'start/start.html',{"login_display":login_display,"log_url":log_url})

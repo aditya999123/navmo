@@ -2,6 +2,11 @@
 <head><title>Acknowledgement</title>
 </head>
 <body>
+{% include "base_head.html" %}
+{% block content %}
+
 {{message|safe}}
+{% endblock content %}
+{% include "base_foot.html" %}
 </body>
 </html>

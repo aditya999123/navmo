@@ -62,6 +62,14 @@ def payment(request):
 		print json
 		url_test = 'https://test.payu.in/_payment'
 		url="https://secure.payu.in/_payment"
+		if request.user.is_authenticated():
+			login_display='Logout'
+			log_url='logout'
+		else:
+			login_display='SignUp'
+			log_url='register'
+		json['login_display']=login_display,
+		json['log_url']=log_url
 		return render(request,'payment/payment.html',json)
 	else:
 		url='https://www.payumoney.com/payment/payment/chkMerchantTxnStatus?'
@@ -74,7 +82,16 @@ def payment(request):
 		
 		head={"Authorization": "Egmegr2N2HD0Y7rBRcU3GQRuzMH9BZ0z05HZIkex/lo="}
 		result=requests.request('post',url,json=json_sent,headers=head)
-		json={'message':str(HttpResponse(result))}
+		
+		if request.user.is_authenticated():
+			login_display='Logout'
+			log_url='logout'
+		else:
+			login_display='SignUp'
+			log_url='register'
+		json={'message':str(HttpResponse(result)),
+		'login_display':login_display,
+		'log_url':log_url}
 		return render(request,'message/message.html',json)
 @login_required
 @csrf_exempt
@@ -124,6 +141,17 @@ def payment_faliure(request):
 	hashh=hashlib.sha512(retHashSeq).hexdigest().lower()
 	if(hashh !=posted_hash):
 		status='Invalid Transaction. Please try again'
-	return render(request,"payment/failure.html",{"txnid":txnid,"status":status,"amount":amount})
+	if request.user.is_authenticated():
+		login_display='Logout'
+		log_url='logout'
+	else:
+		login_display='SignUp'
+		log_url='register'
+	json={'login_display':login_display,
+	'log_url':log_url,
+	"txnid":txnid,
+	"status":status,
+	"amount":amount}
+	return render(request,"payment/failure.html",json)
 
 	
