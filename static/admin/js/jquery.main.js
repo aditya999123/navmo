@@ -172,8 +172,9 @@ $(function(){
 
     $('#submit_fourth').click(function(){
         //send information to server
-        alert('Data sent');
-        window.location.href="";
+        //alert('Data sent');
+
+document.forms["form"].submit();
     });
 
 }); 

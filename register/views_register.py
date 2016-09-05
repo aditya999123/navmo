@@ -28,20 +28,65 @@ def registration(request):
 	if(request.method=="GET"):
 		return render(request,'registration/registration.html')
 	if(request.method=="POST"):
+		firstname=request.POST.get('firstname')
+		lastname=request.POST.get('lastname')
+		fathername=request.POST.get('fathername')
+		mothername=request.POST.get('mothername')
+		dob=request.POST.get('dob')
+		gender=request.POST.get('gender')
+		tsize=request.POST.get('tsize')
+		email=request.POST.get('email')
+		pnum=request.POST.get('pnum')
+		address=request.POST.get('address')
+		school=request.POST.get('school')
+		sclass=request.POST.get('sclass')
+		exam_group=request.POST.get('exam_group')
+		first_prefrence=request.POST.get('sname')
+		first_choice=request.POST.get('choices')
+		second_choice=request.POST.get('choices1')
+		second_prefrence=request.POST.get('sec_name')
+		workshop=request.POST.get('workshop')
+		mpe=request.POST.get('mpe')
+
+
 		this_refrence_id=str(int(user_data.objects.all().last().refrence_id)+1)
-		user_data.objects.create(refrence_id=this_refrence_id,
-			first_name=request.POST.get('first_name'),
-			last_name=request.POST.get('last_name'),
-			number=request.POST.get('number'),
-			)
-		user = User.objects.create_user(
-            username=this_refrence_id,
-            password=request.POST.get('password'),
-            email=request.POST.get('email'),
+		if(int(mpe)==1):
+			mpe_flag=1
+		else:
+			mpe_flag=0
+		user_data.objects.create(
+			refrence_id=this_refrence_id,
+			first_name=firstname,
+			last_name=lastname,
+			number=pnum,
+			email=email,
+			parent_father=fathername,
+			parent_mother=mothername,
+			dob=dob,
+            tshirt_size=tsize,
+            address=address,
+            school=school,
+            grade=sclass,
+            exam_centre_1=first_prefrence,
+            exam_centre_2=second_prefrence,
+            flag_mpe_student=mpe_flag,
+            flag_exam_group=int(exam_group),
+            flag_exam_centre_1=int(first_choice),
+            flag_exam_centre_2=int(second_choice),
+            flag_workshop=int(workshop)
             )
+		print user_data.objects.get(refrence_id=this_refrence_id)
+			
+
+		User.objects.create_user(
+			username=this_refrence_id,
+			password=request.POST.get('password'),
+			email=email,
+			)
+
 		n=random.randint(1000,9999)
-		payment_data.objects.create(refrence_id=this_refrence_id,flag=0,amount=0,domain_type=request.POST.get('domain_type'))
-		otp_data.objects.create(refrence_id=this_refrence_id,otp=n,flag=0,number=request.POST.get('number'))
+		payment_data.objects.create(refrence_id=this_refrence_id,flag=0,amount=0,domain_type=int(exam_group))
+		otp_data.objects.create(refrence_id=this_refrence_id,otp=n,flag=0,number=pnum)
 		return render(request,
 			'registration/continue.html',
 			{
