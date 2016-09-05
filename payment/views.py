@@ -12,14 +12,11 @@ from django.contrib import admin
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.auth.views import login,logout
-# Create your views here.
 from register.models import user_data
 from .models import payment_data,domain_data
 import requests
 import random
-
 import hashlib
-
 from django.core.urlresolvers import reverse
 @login_required
 def payment(request):
@@ -30,6 +27,7 @@ def payment(request):
 		domain_type=payment_data_row.domain_type
 		amount=domain_data.objects.get(domain_type=domain_type).amount
 		setattr(payment_data_row,'last_transaction_id',str(request.user)+str(n))
+		setattr(payment_data_row,'amount',str(amount))
 		payment_data_row.save()
 		key='YSLeH0'		
 		test_key="JBZaLc"
@@ -60,13 +58,24 @@ def payment(request):
 		"hash":str(hex_dig),
 		"url":"https://secure.payu.in/_payment",
 		}
-		head={"Authorization": "Egmegr2N2HD0Y7rBRcU3GQRuzMH9BZ0z05HZIkex/lo="} 
+		head={"Authorization": "Egmegr2N2HD0Y7rBRcU3GQRuzMH9BZ0z05HZIkex/lo="}
 		print json
 		url_test = 'https://test.payu.in/_payment'
 		url="https://secure.payu.in/_payment"
 		return render(request,'payment/payment.html',json)
 	else:
-		return HttpResponseRedirect("/home")
+		url='https://www.payumoney.com/payment/payment/chkMerchantTxnStatus?'
+		key='YSLeH0'
+		txnid=payment_data_row.last_transaction_id
+		json_sent={
+		'merchantTransactionIds':txnid,
+		'merchantKey':key
+		}
+		
+		head={"Authorization": "Egmegr2N2HD0Y7rBRcU3GQRuzMH9BZ0z05HZIkex/lo="}
+		result=requests.request('post',url,json=json_sent,headers=head)
+		json={'message':str(HttpResponse(result))}
+		return render(request,'message/message.html',json)
 @login_required
 @csrf_exempt
 def payment_success(request):

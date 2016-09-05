@@ -16,6 +16,7 @@ class user_data(models.Model):
     address=models.CharField(max_length=120,blank=True,null=True)
     school=models.CharField(max_length=120,blank=True,null=True)
     grade=models.CharField(max_length=120,blank=True,null=True)
+    gender=models.CharField(max_length=120,blank=True,null=True)
     exam_centre_1=models.CharField(max_length=120,blank=True,null=True)
     exam_centre_2=models.CharField(max_length=120,blank=True,null=True)
     flag_workshop=models.PositiveSmallIntegerField(default=0)
