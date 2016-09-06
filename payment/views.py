@@ -63,13 +63,14 @@ def payment(request):
 		url_test = 'https://test.payu.in/_payment'
 		url="https://secure.payu.in/_payment"
 		if request.user.is_authenticated():
-			login_display='Logout'
-			log_url='logout'
+			login_display='<li><a href="/logout">Logout</a></li>'
+			login_display2=''
 		else:
-			login_display='SignUp'
-			log_url='register'
+			login_display='<li><a href="/register">Register</a></li>'
+			login_display2='<li><a href="/login">Login</a></li>'
+
 		json['login_display']=login_display,
-		json['log_url']=log_url
+		json['login_display2']=login_display2,
 		return render(request,'payment/payment.html',json)
 	else:
 		url='https://www.payumoney.com/payment/payment/chkMerchantTxnStatus?'
@@ -84,14 +85,15 @@ def payment(request):
 		result=requests.request('post',url,json=json_sent,headers=head)
 		
 		if request.user.is_authenticated():
-			login_display='Logout'
-			log_url='logout'
+			login_display='<li><a href="/logout">Logout</a></li>'
+			login_display2=''
 		else:
-			login_display='SignUp'
-			log_url='register'
+			login_display='<li><a href="/register">Register</a></li>'
+			login_display2='<li><a href="/login">Login</a></li>'
 		json={'message':str(HttpResponse(result)),
 		'login_display':login_display,
-		'log_url':log_url}
+		'login_display2':login_display2,
+		}
 		return render(request,'message/message.html',json)
 @login_required
 @csrf_exempt
@@ -115,10 +117,17 @@ def payment_success(request):
 		status='Invalid Transaction'
 	payment_data_row=payment_data.objects.get(refrence_id=str(request.user))
 
+	if request.user.is_authenticated():
+		login_display='<li><a href="/logout">Logout</a></li>'
+		login_display2=''
+	else:
+		login_display='<li><a href="/register">Register</a></li>'
+		login_display2='<li><a href="/login">Login</a></li>'
+
 	if(status==1):
 		setattr(payment_data_row,'flag',1)
 		payment_data_row.save()	
-	return render(request,'payment/success.html',{"txnid":txnid,"status":status,"amount":amount})
+	return render(request,'payment/success.html',{"txnid":txnid,"status":status,"amount":amount,"login_display":login_display,"login_display2":login_display2})
 
 
 @login_required
@@ -141,14 +150,16 @@ def payment_faliure(request):
 	hashh=hashlib.sha512(retHashSeq).hexdigest().lower()
 	if(hashh !=posted_hash):
 		status='Invalid Transaction. Please try again'
+
 	if request.user.is_authenticated():
-		login_display='Logout'
-		log_url='logout'
+		login_display='<li><a href="/logout">Logout</a></li>'
+		login_display2=''
 	else:
-		login_display='SignUp'
-		log_url='register'
+		login_display='<li><a href="/register">Register</a></li>'
+		login_display2='<li><a href="/login">Login</a></li>'
+
 	json={'login_display':login_display,
-	'log_url':log_url,
+	'login_display2':login_display2,
 	"txnid":txnid,
 	"status":status,
 	"amount":amount}

@@ -15,13 +15,13 @@
 {% include "base_head.html" %}
 {% block content %}
 
-<section class="slider_wrapper">
+<!--<section class="slider_wrapper">
   <div id="camera_wrap" class="">
     <div data-src="/static/general/images/slide.jpg"></div>
     <div data-src="/static/general/images/slide1.jpg"></div>
     <div data-src="/static/general/images/slide2.jpg"></div>  
   </div>  
-</section> 
+</section>--> 
 	Mobile Verification done
     <form method="post" action=".">{% csrf_token %}
         Payment:<input type="submit" value="{{payment_status}}"/>

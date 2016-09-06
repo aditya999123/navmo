@@ -64,8 +64,8 @@
               header
 =================================-->
 <header>
-  <center><table><tr><td width=400>
-<img src="/static/general/images/2nd.png" height =80%></td><td>
+  <center><table border =30 width=1400><tr><td><br>
+<img src="/static/general/images/2nd.png" height="200"></td><td>
   <div class="container_12">
     <div class="grid_12">
       
@@ -91,7 +91,8 @@
                <li><a href="/overview">Overview</a></li>
                <li><a href="/contactus">ContactUs</a></li>
                <li><a href="/aboutus">AboutUs</a></li>
-              <li><a href="/{{log_url}}">{{login_display}}</a></li>
+              {{login_display|safe}}{{login_display2|safe}}
+
              </ul>
             </nav>
             <div class="clear"></div>

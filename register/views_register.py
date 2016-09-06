@@ -88,11 +88,12 @@ def registration(request):
 			email=email,
 			)
 		if request.user.is_authenticated():
-			login_display='Logout'
-			log_url='logout'
+			login_display='<li><a href="/logout">Logout</a></li>'
+			login_display2=''
+		
 		else:
-			login_display='SignUp'
-			log_url='register'
+			login_display='<li><a href="/register">Register</a></li>'
+			login_display2='<li><a href="/login">Login</a></li>'
 
 		n=random.randint(1000,9999)
 		payment_data.objects.create(refrence_id=this_refrence_id,flag=0,amount=0,domain_type=int(exam_group))
@@ -102,18 +103,18 @@ def registration(request):
 			{
 			'message':'Please note the refrence id \n this will be used for user login'+str(int(user_data.objects.all().last().refrence_id)),
 			'login_display':login_display,
-			'log_url':log_url
+			'login_display2':login_display2
 			}
 			)
 
 @login_required
 def home(request):
 	if request.user.is_authenticated():
-		login_display='Logout'
-		log_url='logout'
+		login_display='<li><a href="/logout">Logout</a></li>'
+		login_display2=''
 	else:
-		login_display='SignUp'
-		log_url='register'
+		login_display='<li><a href="/register">Register</a></li>'
+		login_display2='<li><a href="/login">Login</a></li>'
 	if(otp_data.objects.get(refrence_id=str(request.user)).flag==1):
 		if(request.method=="POST"):
 			return HttpResponseRedirect("/payment/")
@@ -140,7 +141,7 @@ def home(request):
 	    'flag_exam_centre_1':user_data_row.flag_exam_centre_1,
 	    'flag_exam_centre_2':user_data_row.flag_exam_centre_2,
 	    'login_display':login_display,
-	    'log_url':log_url
+	    'ogin_display2':login_display2,
 	    }
 	    #as
 		if(payment_data.objects.get(refrence_id=str(request.user)).flag==1):
@@ -162,9 +163,17 @@ def logout_and_register(request):
 
 def start(request):
 	if request.user.is_authenticated():
-		login_display='Logout'
-		log_url='logout'
+		return HttpResponseRedirect("/home")
 	else:
-		login_display='SignUp'
-		log_url='register'
-	return render(request,'start/start.html',{"login_display":login_display,"log_url":log_url})
+		login_display='<li><a href="/register">Register</a></li>'
+		login_display2='<li><a href="/login">Login</a></li>'
+	return render(request,'start/start.html',{"login_display":login_display,"login_display2":login_display2})
+
+def contactus(request):
+	if request.user.is_authenticated():
+		login_display='<li><a href="/logout">Logout</a></li>'
+		login_display2=''
+	else:
+		login_display='<li><a href="/register">Register</a></li>'
+		login_display2='<li><a href="/login">Login</a></li>'
+	return render(request,'contactus/contact_us.html',{"login_display":login_display,"login_display2":login_display2})

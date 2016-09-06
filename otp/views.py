@@ -24,13 +24,13 @@ def verify_mobile(request):
 	if(request.method=="GET"):
 		json={"number":otp_data_row.number,"error":error_message}
 		if request.user.is_authenticated():
-			login_display='Logout'
-			log_url='logout'
+			login_display='<li><a href="/logout">Logout</a></li>'
+			login_display2=''
 		else:
-			login_display='SignUp'
-			log_url='register'
+			login_display='<li><a href="/register">Register</a></li>'
+			login_display2='<li><a href="/login">Login</a></li>'
 		json['login_display']=login_display,
-		json['log_url']=log_url
+		json['login_display2']=login_display2,
 		return render(request,'mobile/mobile.html',json)
 	if(request.method=="POST"):
 		if request.POST.get("send")=='SEND':
@@ -46,13 +46,13 @@ def verify_mobile(request):
 			print requests.request('GET', url)
 			json={"number":otp_data_row.number,"error":error_message}
 			if request.user.is_authenticated():
-				login_display='Logout'
-				log_url='logout'
+				login_display='<li><a href="/logout">Logout</a></li>'
+				login_display2=''
 			else:
-				login_display='SignUp'
-				log_url='register'
-				json['login_display']=login_display,
-				json['log_url']=log_url
+				login_display='<li><a href="/register">Register</a></li>'
+				login_display2='<li><a href="/login">Login</a></li>'
+			json['login_display']=login_display,
+			json['login_display2']=login_display2,	
 			return render(request,'mobile/mobile.html',json)
 		if request.POST.get("verify")=='VERIFY':
 			print"command in verify"
@@ -67,11 +67,11 @@ def verify_mobile(request):
 				error_message="otp did not match Try Again"
 				json={"number":otp_data_row.number,"error":error_message}
 				if request.user.is_authenticated():
-					login_display='Logout'
-					log_url='logout'
+					login_display='<li><a href="/logout">Logout</a></li>'
+					login_display2=''
 				else:
-					login_display='SignUp'
-					log_url='register'
+					login_display='<li><a href="/register">Register</a></li>'
+					login_display2='<li><a href="/login">Login</a></li>'
 				json['login_display']=login_display,
-				json['log_url']=log_url
+				json['login_display2']=login_display2,
 				return render(request,'mobile/mobile.html',json)
