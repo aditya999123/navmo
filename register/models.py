@@ -2,7 +2,6 @@ from __future__ import unicode_literals
 
 from django.db import models
 
-
 class user_data(models.Model):
     refrence_id=models.CharField(max_length=10,blank=True,null=True)
     first_name=models.CharField(max_length=120,blank=True,null=True)
@@ -24,3 +23,6 @@ class user_data(models.Model):
     flag_exam_group=models.PositiveSmallIntegerField(default=0)
     flag_exam_centre_1=models.PositiveSmallIntegerField(default=0)
     flag_exam_centre_2=models.PositiveSmallIntegerField(default=0)
+
+class exam_center_data(models.Model):
+    exam_center=models.CharField(max_length=100,blank=True,null=True)

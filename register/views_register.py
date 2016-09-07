@@ -16,6 +16,7 @@ from django.contrib.auth.views import login,logout
 from otp.models import otp_data
 from payment.models import payment_data
 import random
+from .models import exam_center_data
 def login_check(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect('/home')
@@ -24,11 +25,22 @@ def login_check(request):
 @csrf_protect
 def registration(request):	
 	if request.user.is_authenticated():
-		login_display='Logout'
-		log_url='logout'
-		return HttpResponseRedirect('/logout_and_register/',{'login_display':login_display,'log_url':log_url})
+		login_display='<li><a href="/logout">Logout</a></li>'
+		login_display2=''
+		json={
+		'login_display':login_display,
+		'login_display2':login_display2,
+		}
+		
+		return HttpResponseRedirect('/logout_and_register/',json)
 	if(request.method=="GET"):
-		return render(request,'registration/registration.html')
+		json={}
+		list_data=''
+		for o in exam_center_data.objects.all():
+			list_data+='<option value="'+o.exam_center+'">'+o.exam_center+'</option>'
+			print o,o.exam_center
+		json['list_data']=list_data
+		return render(request,'registration/registration.html',json)
 	if(request.method=="POST"):
 		firstname=request.POST.get('firstname')
 		lastname=request.POST.get('lastname')
