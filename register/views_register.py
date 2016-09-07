@@ -27,17 +27,20 @@ def registration(request):
 	if request.user.is_authenticated():
 		login_display='<li><a href="/logout">Logout</a></li>'
 		login_display2=''
-		list_data=''
-		for o in exam_center_data.objects.all():
-			list_data+='<option value="'+o+'">'+o+'</option>'
 		json={
 		'login_display':login_display,
 		'login_display2':login_display2,
 		}
-		json['list_data']=list_data
+		
 		return HttpResponseRedirect('/logout_and_register/',json)
 	if(request.method=="GET"):
-		return render(request,'registration/registration.html')
+		json={}
+		list_data=''
+		for o in exam_center_data.objects.all():
+			list_data+='<option value="'+o.exam_center+'">'+o.exam_center+'</option>'
+			print o,o.exam_center
+		json['list_data']=list_data
+		return render(request,'registration/registration.html',json)
 	if(request.method=="POST"):
 		firstname=request.POST.get('firstname')
 		lastname=request.POST.get('lastname')

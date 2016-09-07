@@ -147,21 +147,7 @@
                     <input type="radio" name="sname" id="sname" value="1" />
                     <label for="sname" class="radio">MPE School/Center</label>
                     <select id="choices" name="choices">
-                        <option value="0"></option>
-                        <option value="0"></option>
-                        <option value="0"></option>
-                        <option value="0"></option>
-                        <option value="0"></option>
-                        <option value="0"></option>
-                        <option value="0"></option>
-                        <option value="0"></option>
-                        <option value="0"></option>
-                        <option value="0"></option>
-                        <option value="0"></option>
-                        <option value="0"></option>
-                        <option value="0"></option>
-                        <option value="0"></option>
-                    </select>
+                    {{list_data|safe}}</select>
 
                     <h3>Second Prefrence</h3>
                     <input type="radio" name="sec_name" id="sec_name" value="0" />
@@ -169,7 +155,7 @@
                     <input type="radio" name="sec_name" id="sec_name" value="1" />
                     <label for="sec_name" class="radio">MPE School/Center</label>
                     <select id="choices1" name="choices1">
-                        {{list_data}}
+                        {{list_data|safe}}
                     </select>
                   <input type="checkbox" name="workshop" id="workshop" value="1"/>
                   <label for="workshop" class="radio">I am interested in signing up for a 10 days workshop at my school or nearest mind power Education Center</label>
