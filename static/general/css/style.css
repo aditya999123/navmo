@@ -128,8 +128,8 @@ sss * {
   -webkit-text-size-adjust: none;
 }
 body {
-  position: relative;
-  background: #FAC80F;
+  position: relative; 
+  background-color: #06AED5;
   color: #363535;
   font: 300 18px/24px 'Open Sans', sans-serif;
 }
@@ -357,6 +357,7 @@ a:hover {
 }
 /*header*/
 header {
+  background: #FAC80F;
   color:#FAC80F;
   display: block;
   position: relative;
@@ -678,15 +679,17 @@ a.color1:hover {
 }
 /**Footer**/
 #footer {
+  height: 30%;
   text-align: center;
   color: #ffffff;
-  padding: 87px 0 50px;
+  background-color: #EDE7D9;
+  padding: 25px 0 25px;
   font-size: 14px;
   line-height: 16px;
   font-weight: normal;
 }
 #footer h1 {
-  padding-bottom: 47px;
+  padding-bottom: 7px;
 }
 #footer .footer_phone {
   font-size: 24px;
