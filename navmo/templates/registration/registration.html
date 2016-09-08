@@ -18,6 +18,8 @@
       <!--Import Google Icon Font-->
     <body>
       <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script type="text/javascript" src="/static/materialize/js/materialize.min.js"></script>
 <script type="text/javascript">
@@ -28,59 +30,81 @@
     selectMonths: true, // Creates a dropdown to control month
     selectYears: 15 // Creates a dropdown of 15 years to control year
   });
+ $(function () {
+        $("#btnSubmit").click(function () {
+            var password = $("#password").val();
+            var confirmPassword = $("#repassword").val();
+            var n = password.length;
+            if (n<6) {
+                alert("Password should atleast contain 6 letters");
+                return false;
+            }
+            if (password != confirmPassword) {
+                alert("Passwords do not match.");
+                return false;
+            }
+
+            return true;
+        });
+    });
 </script>
 <div class="row">
 
-    <form class="col s12">
+    <form class="col s12" action="." method="post">{% csrf_token %}
         
 
       <div class="row">
-        <div class="input-field col s3">
-          <input id="first_name" type="text" class="validate">
+        <div class="input-field col s4"></div><div class="input-field col s4">
+          <input id="first_name" type="text" class="validate" required>
           <label for="first_name">First Name</label>
         </div>
-        <div class="input-field col s3">
-          <input id="last_name" type="text" class="validate">
+      </div>
+      <div class="row">
+        <div class="input-field col s4"></div><div class="input-field col s4">
+          <input id="last_name" type="text" class="validate" required>
           <label for="last_name">Last Name</label>
         </div>
       </div>
       <div class="row">
-        <div class="input-field col s3">
-          <input id="fathers_name" type="text" class="validate">
+        <div class="input-field col s4"></div><div class="input-field col s4">
+          <input id="fathers_name" type="text" class="validate" required>
           <label for="fathers_name">Father's Name</label>
         </div>
-        <div class="input-field col s3">
-          <input id="mothers_name" type="text" class="validate">
+      </div>
+      <div class="row">
+        <div class="input-field col s4"></div><div class="input-field col s4">
+          <input id="mothers_name" type="text" class="validate" required>
           <label for="mothers_name">Mother's Name</label>
         </div>
       </div>
       <div class="row">
-        <div class="input-field col s6">
-          <input id="password" type="password" class="validate">
+        <div class="input-field col s4"></div><div class="input-field col s4">
+          <input id="password" type="password" class="validate" required>
           <label for="password">Password</label>
         </div>
       </div>
       <div class="row">
-        <div class="input-field col s6">
-          <input id="repassword" type="password" class="validate">
+        <div class="input-field col s4"></div><div class="input-field col s4">
+          <input id="repassword" type="password" class="validate" onChange="checkPasswordMatch();" required>
           <label for="repassword">Re-enter Password</label>
         </div>
       </div>
+      <div id="divCheckPasswordMatch"></div>
       <div class="row">
-        <div class="input-field col s6">
-          <input id="email" type="email" class="validate">
+        <div class="input-field col s4"></div><div class="input-field col s4">
+          <input id="email" type="email" class="validate" required>
           <label for="email">Email</label>
         </div>
       </div>
          <div class="row">
-        <div class="input-field col s6">
-          <input id="mobile" type="number" class="validate">
+        <div class="input-field col s4"></div><div class="input-field col s4">
+          <input id="mobile" type="number" class="validate" required>
           <label for="mobile">Mobile:</label>
         </div>
       </div>
-      
- <div class="input-field col s6">
-    <select>
+      <div class="row">
+ <div class="input-field col s4"></div><div class="input-field col s4">
+    <select required>
       <option value="None" disabled selected>Gender</option>
       <option value="male">Male</option>
       <option value="female">Female</option>
@@ -88,8 +112,10 @@
     </select>
     <label>Gender</label>
   </div>
-<div class="input-field col s6">
-    <select>
+</div>
+<div class="row">
+<div class="input-field col s4"></div><div class="input-field col s4">
+    <select required>
       <option value="None" disabled selected>TShirt-Size</option>
       <option value="24">24</option>
       <option value="26">26</option>
@@ -106,29 +132,31 @@
     </select>
     <label>T-Shirt Size</label>
   </div>
+</div>
 <div class="row">
-        <div class="input-field col s3">
-          <input id="address" type="text" class="validate">
+        <div class="input-field col s4"></div><div class="input-field col s4">
+          <input id="address" type="text" class="validate" required>
           <label for="address">Adress:</label>
         </div>
 </div>       
 
-DOB
+
 <div class="row">
-        <div class="input-field col s3">
-          <input id="dob" type="date" class="datepicker">
+        <div class="input-field col s4"></div><div class="input-field col s4">
+        DOB
+          <input id="dob" type="date" class="datepicker" required>
           <!-- <label for="dob">DOB:</label> -->
         </div>
 </div>
 <div class="row">
-        <div class="input-field col s3">
-          <input id="schoolname" type="text" class="validate">
+        <div class="input-field col s4"></div><div class="input-field col s4">
+          <input id="schoolname" type="text" class="validate" required>
           <label for="schoolname">School:</label>
         </div>
 </div>       
 <div class="row">
-<div class="input-field col s6">
-    <select name="class" id="class">
+<div class="input-field col s4"></div><div class="input-field col s4">
+    <select name="class" id="class" required>
       <option value="LKG" disabled selected>LKG</option>
       <option value="LKG">LKG</option>
       <option value="UKG">UKG</option>
@@ -151,11 +179,11 @@ DOB
   </div>
 </div>
 <div class="row">
-<div class="input-field col s3">
+<div class="input-field col s4"></div><div class="input-field col s4">
 <h3><label>Select Exam Group</label></h3><br>
 
      <p>
-      <input class="with-gap" name="group_exam" type="radio" id="gamma"  />
+      <input class="with-gap" name="group_exam" type="radio" id="gamma" required/>
       <label for="gamma">Gamma (Mind Magic open to all)</label>
     </p>
     <p>
@@ -174,10 +202,10 @@ DOB
 </div>
 <div class="row">
 <div class="input-field col s3">
-<h3><label>Select 1<sup>st</sup> Preference</label></h3><br>
+<h3><label>Select 1<sup>st</sup> Preference</label></h3>
 
      <p>
-      <input class="with-gap" name="first_school" type="radio" id="mpe"  />
+      <input class="with-gap" name="first_school" type="radio" id="mpe"  required/>
       <label for="mpe">MPE School</label>
     </p>
     <p>
@@ -185,29 +213,21 @@ DOB
       <label for="own">Own School</label>
     </p>
       </div>
-<!-- </div>
-<div class="row"> -->
-<div class="input-field col s3">
-<div class="row"></div>
-<div class="row"></div>
-<div class="row"></div>
-<div class="row"></div>
-<!-- <h3><label for ="first_prefernce">1<sup>st</sup> Preference</label></h3><br>
- -->
+<div class="row">
+<div class="input-field col s6">
+
     <select name="first_prefernce" id="first_prefernce">
         <option value="None" disabled selected>Select School</option>
       {{list_data|safe}}
     </select>
     
   </div>
-
 </div>
-<div class="row">
 <div class="input-field col s3">
-<h3><label>Select 2<sup>nd</sup> Preference</label></h3><br>
+<h3><label>Select 2<sup>nd</sup> Preference</label></h3>
 
      <p>
-      <input class="with-gap" name="second_school" type="radio" id="mpe2"  />
+      <input class="with-gap" name="second_school" type="radio" id="mpe2"  required/>
       <label for="mpe2">MPE School</label>
     </p>
     <p>
@@ -215,23 +235,20 @@ DOB
       <label for="own2">Own School</label>
     </p>
       </div>
-<!-- </div>
-<div class="row"> -->
-<div class="input-field col s3">
-<div class="row"></div>
-<div class="row"></div>
-<div class="row"></div>
-<div class="row"></div>
-<!-- <h3><label for ="first_prefernce">1<sup>st</sup> Preference</label></h3><br>
- -->
+<div class="row">
+<div class="input-field col s6">
     <select name="second_prefernce" id="second_prefernce">
         <option value="None" disabled selected>Select School</option>
       {{list_data|safe}}
     </select>
     
   </div>
-
 </div>
+</div>
+ <button class="btn waves-effect waves-light" id="btnSubmit" type="submit" name="action">Submit
+    <i class="material-icons right">send</i>
+  </button>
+        
     </form>
   </div>
 
