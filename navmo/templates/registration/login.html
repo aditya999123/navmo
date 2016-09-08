@@ -1,24 +1,63 @@
-<html>
-<head><title>login</title></head>
-<body>
-{% include "base_head.html" %}
-{% block content %}
+  <html>
+  <head>
+  	<title>Login - Navmo</title>
+  	
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="/static/materialize/css/materialize.min.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="/static/materialize/css/colour.css"  media="screen,projection"/>
 
-<h2>login</h2>
-    {% if form.errors %}
-        <p>Your username and password didn't match. Please try again.</p>
-    {% endif %}
-    <form method="post" action=".">{% csrf_token %}
-        <table border="0">
-            <tr><th><label for="id_username">Username:</label></th><td>{{ form.username }}</td></tr>
-            <tr><th><label for="id_password">Password:</label></th><td>{{ form.password }}</td></tr>
-        </table>
-        <input type="submit" value="Login" />
-        <input type="hidden" name="next" value="/home" />
-    </form>
-    <a href="/register">Register</a>
-{% endblock content %}
-{% include "base_foot.html" %}
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-</body>
-</html>
+  	
+  {% include "base_head.html" %}
+
+  {% block content %}
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="/static/materialize/js/materialize.min.js"></script>
+
+        <!--Import Google Icon Font-->
+      <body bgcolor="#FFFFFF">
+        <!--Import jQuery before materialize.js-->
+        
+  <center><h1>Navmo Login</h1></center>
+  <div class="row">
+      <form  method="post" action="." class="col s12">{% csrf_token %}
+
+
+
+        <div class="row">
+        <div class="input-field col s4"></div>
+          <div class="input-field col s4">
+            <input id="reference_id" type="text" class="validate" required>
+            <label for="reference_id">Reference Id</label>
+          </div>
+          </div>
+          <div class="row">
+          <div class="input-field col s4"></div>
+          <div class="input-field col s4">
+            <input id="password" type="password" class="validate" required>
+            <label for="password">Password</label>
+          </div>
+          </div>
+          <div class="row">
+          <div class="input-field col s5"></div>
+          <div class="input-field col s2">
+          <button class="btn-large waves-effect waves-light" type="submit" name="action">Login
+          <i class="material-icons right">send</i>
+          </button>
+          </div>
+          </div>
+          
+        
+      </form>
+    </div>
+
+      </body>
+
+
+  {% include "base_foot.html" %}
+  {% endblock content %}
+
+  </html>
