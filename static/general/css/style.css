@@ -177,14 +177,14 @@ h6 {
 h2 {
   font-size: 72px;
   line-height: 52px;
-  padding-top: 86px;
-  margin-bottom: 71px;
+  padding-top: 4px;
+  margin-bottom: 8px;
 }
 h3 {
   font: bold 48px/52px 'Marvel', sans-serif;
   color: #1e2439;
-  padding-top: 44px;
-  margin-bottom: 28px;
+  padding-top: 8px;
+  margin-bottom: 8px;
 }
 /****Lists****/
 ul {
