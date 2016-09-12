@@ -54,7 +54,8 @@ def registration(request):
 		address=request.POST.get('address')
 		school=request.POST.get('school')
 		sclass=request.POST.get('class')
-		exam_group=request.POST.get('group_exam')
+		exam_group_1=request.POST.get('group_exam_field1')
+		exam_group_2=request.POST.get('group_exam_field2')
 		first_prefrence=request.POST.get('first_prefernce')
 		first_choice=request.POST.get('first_school')
 		second_choice=request.POST.get('second_school')
@@ -62,6 +63,9 @@ def registration(request):
 		workshop=request.POST.get('workshop')
 		mpe=request.POST.get('mpe_student')
 		gender=request.POST.get('gender')
+		flag_group_exam1=request.POST.get('group_exam1')
+		flag_group_exam2=request.POST.get('group_exam2')
+
 
 
 		this_refrence_id=str(int(user_data.objects.all().last().refrence_id)+1)
@@ -70,6 +74,10 @@ def registration(request):
 		else:
 			mpe_flag=0
 		user_data.objects.create(
+			exam_group_1=exam_group_1,
+			exam_group_2=exam_group_2,
+			flag_exam_group_1=int(flag_group_exam1),
+			flag_exam_group_2=int(flag_group_exam2),
 			refrence_id=this_refrence_id,
 			first_name=firstname,
 			last_name=lastname,
@@ -85,7 +93,6 @@ def registration(request):
             exam_centre_1=first_prefrence,
             exam_centre_2=second_prefrence,
             flag_mpe_student=mpe_flag,
-            flag_exam_group=int(exam_group),
             flag_exam_centre_1=int(first_choice),
             flag_exam_centre_2=int(second_choice),
             flag_workshop=int(workshop),
@@ -108,7 +115,13 @@ def registration(request):
 			login_display2='<li><a href="/login">Login</a></li>'
 
 		n=random.randint(1000,9999)
-		payment_data.objects.create(refrence_id=this_refrence_id,flag=0,amount=0,domain_type=int(exam_group))
+		if ((int(flag_group_exam1)==1)and(int(flag_group_exam2)==0)):
+			domain_type=1
+		if ((int(flag_group_exam1)==0)and(int(flag_group_exam2)==1)):
+			domain_type=2
+		if ((int(flag_group_exam1)==1)and(int(flag_group_exam2)==1)):
+			domain_type=3
+		payment_data.objects.create(refrence_id=this_refrence_id,flag=0,amount=0,domain_type=domain_type)
 		otp_data.objects.create(refrence_id=this_refrence_id,otp=n,flag=0,number=pnum)
 		return render(request,
 			'message/message.html',
@@ -149,7 +162,8 @@ def home(request):
 	    'exam_centre_2':user_data_row.exam_centre_2,
 	    'flag_workshop':user_data_row.flag_workshop,
 	    'flag_mpe_student':user_data_row.flag_mpe_student,
-	    'flag_exam_group':user_data_row.flag_exam_group,
+	    'exam_group1':user_data_row.exam_group_1,
+	    'exam_group2':user_data_row.exam_group_2,
 	    'flag_exam_centre_1':user_data_row.flag_exam_centre_1,
 	    'flag_exam_centre_2':user_data_row.flag_exam_centre_2,
 	    'login_display':login_display,
