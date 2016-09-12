@@ -4,7 +4,19 @@
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 	<title></title>
 	
+     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="/static/materialize/css/materialize.min.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="/static/materialize/css/colour.css"  media="screen,projection"/>
+
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+
 	<link rel="stylesheet" type="text/css" href="/static/admin/css/style.css" media="all" />
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="/static/materialize/js/materialize.min.js"></script>
 	
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js"></script>
@@ -22,40 +34,68 @@
     <div data-src="/static/general/images/slide2.jpg"></div>  
   </div>  
 </section>--> 
-	Mobile Verification done
-    <form method="post" action=".">{% csrf_token %}
-        Payment:<input type="submit" value="{{payment_status}}"/>
+	<div class="row">
+<div class="col s12 m3"></div>
+ 
+ <div class="col s12 m6">
+    <div class="card horizontal">
+      <div class="card-stacked">
+        <div class="card-content">
+          <p>   Mobile Verification - Done Successfully</p>
+            <br> 
+         <p>    <form method="post" action=".">{% csrf_token %}
+        Payment : <!-- 
+        <button class="btn waves-effect waves-light" value="{{payment_status}}" type="submit">
+     -->
+        <input class="btn waves-effect waves-light green" type="submit" value="{{payment_status}}"/>
     </form>
+</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+ 
 
-	<div id="container">
-        <form action="#" method="post">
+    <div class="row">
+<div class="col s12 m3"></div>
+ 
+ <div class="col s12 m6">
+    <div class="card horizontal">
+      <div class="card-stacked">
+        <div class="card-content">
+
+	    <form action="#" method="post">
 	  <div id="home_details">
-                <h1>REGISTRATION DETAILS<span></span></h1>
+                <h3>REGISTRATION DETAILS</h3>
 
                 <div class="form">
                     
                     <table>
-                        <tr><td>Name:{{first_name}} {{last_name}}</td><td></td></tr>
-                        <tr><td>Father's Name:{{parent_father}}</td><td></td></tr>
-                        <tr><td>Mother's Name:{{parent_mother}}</td><td></td></tr>
-                        <tr><td>Gender:{{gender}}</td><td></td></tr>
-                        <tr><td>T-shirt Size:{{tshirt_size}}</td><td></td></tr>
-                        <tr><td>Email:{{email}}</td><td></td></tr>
-                        <tr><td>Address:{{address}}</td><td></td></tr>
-                        <tr><td>Phone Number:{{number}}</td><td></td></tr>
-                        <tr><td>School Name:{{school}}</td><td></td></tr>
-                        <tr><td>Class:{{grade}}</td><td></td></tr>
-                        <tr><td>MPE:{{flag_mpe_student}}</td><td></td></tr>
-                        <tr><td>Examination Group:{{flag_exam_group}}</td><td></td></tr>
-                        <tr><td>First prefrence:{{exam_centre_1}}</td><td></td></tr>
-                        <tr><td>Second prefrence:{{exam_centre_2}}</td><td></td></tr>
+                        <tr><td>Name:</td><td>{{first_name}} {{last_name}}</td></tr>
+                        <tr><td>Father's Name:</td><td>{{parent_father}}</td></tr>
+                        <tr><td>Mother's Name:</td><td>{{parent_mother}}</td></tr>
+                        <tr><td>Gender:</td><td>{{gender}}</td></tr>
+                        <tr><td>T-shirt Size:</td><td>{{tshirt_size}}</td></tr>
+                        <tr><td>Email:</td><td>{{email}}</td></tr>
+                        <tr><td>Address:</td><td>{{address}}</td></tr>
+                        <tr><td>Phone Number:</td><td>{{number}}</td></tr>
+                        <tr><td>School Name:</td><td>{{school}}</td></tr>
+                        <tr><td>Class:</td><td>{{grade}}</td></tr>
+                        <tr><td>MPE:</td><td>{{flag_mpe_student}}</td></tr>
+                        <tr><td>Examination Group:</td><td>{{flag_exam_group}}</td></tr>
+                        <tr><td>First prefrence:</td><td>{{exam_centre_1}}</td></tr>
+                        <tr><td>Second prefrence:</td><td>{{exam_centre_2}}</td></tr>
                        
                     </table>
                 </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
                 <!-- 
                 <input class="send submit" type="submit" name="submit_fourth" id="submit_fourth" value="" /> -->           
             </div>
-            
+  </div>
+     </div>
+  </div>
+  </div>           
         
 	</div>
 {% endblock content %}
