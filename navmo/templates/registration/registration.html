@@ -58,7 +58,8 @@
 <div class="row">
 
     <form class="col s12" action="." method="post">{% csrf_token %}
-        
+              <h1>Navmo Registration</h1>
+         
 
       <div class="row">
         <div class="input-field col s4"></div><div class="input-field col s4">
@@ -224,7 +225,8 @@
 </div>
 
 <div class="row">
-<div class="input-field col s3">
+<div class="input-field col s4"></div>
+<div class="input-field col s2">
 <h3><label>Select 1<sup>st</sup> Preference</label></h3>
 
      <p>
@@ -237,7 +239,7 @@
     </p>
       </div>
 <div class="row">
-<div class="input-field col s6">
+<div class="input-field col s2">
 
     <select name="first_prefernce" id="first_prefernce">
         <option value="None" disabled selected>Select School</option>
@@ -246,7 +248,10 @@
     
   </div>
 </div>
-<div class="input-field col s3">
+
+
+<div class="input-field col s4"></div>
+<div class="input-field col s2">
 <h3><label>Select 2<sup>nd</sup> Preference</label></h3>
 
      <p>
@@ -259,7 +264,7 @@
     </p>
       </div>
 <div class="row">
-<div class="input-field col s6">
+<div class="input-field col s2">
     <select name="second_prefernce" id="second_prefernce">
         <option value="None" disabled selected>Select School</option>
       {{list_data|safe}}
@@ -282,11 +287,15 @@
     </p>
       </div>
 </div>
-
+<div class="row">
+ <div class="input-field col s4"></div>
+ <div class="input-field col s4">
+ 
  <button class="btn waves-effect waves-light" id="btnSubmit" type="submit" name="action">Submit
     <i class="material-icons right">send</i>
   </button>
-        
+  </div>
+        </div>
     </form>
   </div>
 
