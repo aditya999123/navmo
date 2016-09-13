@@ -48,6 +48,7 @@
                   alert("Passwords do not match.");
                   return false;
               }
+
               
 
 
@@ -64,7 +65,7 @@
                 <span class="card-title black-text" ><h3><center>Navmo - Registration</center></h3></span>
 
 
-      <form black-text action="." method="post">{% csrf_token %}
+      <form black-text action="." method="post"  enctype="multipart/form-data">{% csrf_token %}
                 
            
 
@@ -317,11 +318,26 @@
         <label for="workshop_no">No</label>
       </p>
       <p>
-        <input value="1" class="with-gap" name="workshop" type="radio" id="workshop_yes"  />
+        <input value="1" class="with-gap" name="workshop" type="radio" id="workshop_yes" required/>
         <label for="workshop_yes">Yes</label>
       </p>
         </div>
   </div>
+  <div class="row">
+   <div class="input-field col s4"></div>
+   <div class="input-field col s4">
+  
+ <div class="file-field input-field">
+      <div class="btn">
+        <span>File</span>
+        <input type="file" name="pic">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
+
+  </div></div>
   <div class="row">
    <div class="input-field col s4"></div>
    <div class="input-field col s4">
