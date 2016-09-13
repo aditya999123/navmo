@@ -16,6 +16,7 @@ from django.contrib.auth.views import login,logout
 from otp.models import otp_data
 from payment.models import payment_data
 import random
+import os
 from .models import exam_center_data
 def login_check(request):
     if request.user.is_authenticated():
@@ -45,6 +46,7 @@ def registration(request):
 		json['list_data']=list_data
 		return render(request,'registration/registration.html',json)
 	if(request.method=="POST"):
+		
 		firstname=request.POST.get('firstname')
 		lastname=request.POST.get('lastname')
 		fathername=request.POST.get('fathername')
@@ -68,10 +70,21 @@ def registration(request):
 		gender=request.POST.get('gender')
 		flag_group_exam1=request.POST.get('group_exam1')
 		flag_group_exam2=request.POST.get('group_exam2')
-
-
-
+		image=request.FILES.get('pic').name
 		this_refrence_id=str(int(user_data.objects.all().last().refrence_id)+1)
+		folder = 'media/'+this_refrence_id+'/'
+		os.mkdir(os.path.join(folder))
+		
+		# full_filename = os.path.join(folder, image)
+		# print "full name",full_filename
+		#fout = open(folder+image, 'wb+')
+		print "image=",image
+		fout = open(folder+image, 'w')
+		file_content = request.FILES.get('pic').read()
+		#for chunk in file_content.chunks():
+		fout.write(file_content)
+		fout.close()
+		
 		if(int(mpe)==1):
 			mpe_flag=1
 		else:
@@ -99,7 +112,8 @@ def registration(request):
             flag_exam_centre_1=int(first_choice),
             flag_exam_centre_2=int(second_choice),
             flag_workshop=int(workshop),
-            gender=gender
+            gender=gender,
+            image=folder+image
             )
 		print user_data.objects.get(refrence_id=this_refrence_id)
 			
