@@ -110,7 +110,7 @@ def registration(request):
             flag_exam_centre_2=int(second_choice),
             flag_workshop=int(workshop),
             gender=gender,
-            image=folder+image
+            image=this_refrence_id+'/'+image
             )
 		print user_data.objects.get(refrence_id=this_refrence_id)
 			
@@ -159,6 +159,7 @@ def home(request):
 			return HttpResponseRedirect("/payment/")
 		user_data_row=user_data.objects.get(refrence_id=str(request.user))
 		json={
+		'image':user_data_row.image.url,
 		'refrence_id':user_data_row.refrence_id,
 		'first_name':user_data_row.first_name,
 	    'last_name':user_data_row.last_name,
