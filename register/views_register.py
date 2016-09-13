@@ -140,7 +140,7 @@ def registration(request):
 		return render(request,
 			'message/message.html',
 			{
-			'message':'Please note the refrence id \n this will be used for user login'+str(int(user_data.objects.all().last().refrence_id)),
+			'message':'Please note the refrence id \n this will be used for user login '+str(int(user_data.objects.all().last().refrence_id)),
 			'login_display':login_display,
 			'login_display2':login_display2
 			}
