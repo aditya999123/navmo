@@ -71,55 +71,55 @@
         <div class="row">
           <div class="input-field col s2"></div><div class="input-field col s8">
             <input  name="firstname" id="first_name" type="text" class="validate" required>
-             <label for="first_name">First Name</label>
+             <label for="first_name" data-error="invalid">First Name</label>
         </div>
         </div>
         <div class="row">
           <div class="input-field col s2"></div><div class="input-field col s8">
             <input id="last_name" name="lastname" type="text" class="validate" required>
-            <label for="last_name">Last Name</label>
+            <label for="last_name" data-error="invalid">Last Name</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s2"></div><div class="input-field col s8">
             <input id="fathers_name" name="fathername" type="text" class="validate" required>
-            <label for="fathers_name">Father's Name</label>
+            <label for="fathers_name" data-error="invalid">Father's Name</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s2"></div><div class="input-field col s8">
             <input id="mothers_name" name="mothername" type="text" class="validate" required>
-            <label for="mothers_name">Mother's Name</label>
+            <label for="mothers_name" data-error="invalid">Mother's Name</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s2"></div><div class="input-field col s8">
             <input id="password" name="password" type="password" class="validate" required>
-            <label for="password">Password</label>
+            <label for="password" data-error="invalid">Password</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s2"></div><div class="input-field col s8">
             <input id="repassword" type="password" class="validate" onChange="checkPasswordMatch();" required>
-            <label for="repassword">Re-enter Password</label>
+            <label data-error="invalid" for="repassword">Re-enter Password</label>
           </div>
         </div>
         <div id="divCheckPasswordMatch"></div>
         <div class="row">
           <div class="input-field col s2"></div><div class="input-field col s8">
             <input id="email" type="email" name="email" class="validate" required>
-            <label for="email">Email</label>
+            <label for="email" data-error="invalid">Email</label>
           </div>
         </div>
            <div class="row">
           <div class="input-field col s2"></div><div class="input-field col s8">
             <input id="mobile" type="number" name="pnum" class="validate" required>
-            <label for="mobile">Mobile:</label>
+            <label for="mobile" data-error="invalid">Mobile:</label>
           </div>
         </div>
         <div class="row">
    <div class="input-field col s2"></div><div class="input-field col s8">
-      <select name="gender" required>
+      <select name="gender" required data-error="invalid">
         <option value="None" disabled selected>Gender</option>
         <option value="male">Male</option>
         <option value="female">Female</option>
@@ -130,7 +130,7 @@
   </div>
   <div class="row">
   <div class="input-field col s2"></div><div class="input-field col s8">
-      <select name="tsize" required>
+      <select name="tsize" required data-error="invalid">
         <option value="None" disabled selected>TShirt-Size</option>
         <option value="24">24</option>
         <option value="26">26</option>
@@ -149,7 +149,7 @@
   </div>
   <div class="row">
           <div class="input-field col s2"></div><div class="input-field col s8">
-            <input name="address" id="address" type="text" class="validate" required>
+            <input name="address" id="address" type="text" class="validate" required data-error="invalid">
             <label for="address">Adress:</label>
           </div>
   </div>       
@@ -158,19 +158,19 @@
   <div class="row">
           <div class="input-field col s2"></div><div class="input-field col s8">
           DOB
-            <input name="dob" id="dob" type="date" class="datepicker" required>
+            <input data-error="invalid" name="dob" id="dob" type="date" class="datepicker" required>
             <!-- <label for="dob">DOB:</label> -->
           </div>
   </div>
   <div class="row">
           <div class="input-field col s2"></div><div class="input-field col s8">
-            <input name="school" id="schoolname" type="text" class="validate" required>
+            <input data-error="invalid" name="school" id="schoolname" type="text" class="validate" required>
             <label for="schoolname">School:</label>
           </div>
   </div>       
   <div class="row">
   <div class="input-field col s2"></div><div class="input-field col s8">
-      <select name="class" id="class" required>
+      <select name="class" id="class" required data-error="invalid">
         <option value="LKG" disabled selected>LKG</option>
         <option value="LKG">LKG</option>
         <option value="UKG">UKG</option>
@@ -197,12 +197,12 @@
   <h3><label>MPE Student:</label></h3><br>
 
        <p>
-        <input value="0" class="with-gap" name="mpe_student" type="radio" id="mpe_no" required/>
+        <input value="0" class="with-gap" name="mpe_student" type="radio" id="mpe_no" required data-error="invalid"/>
         <label for="mpe_no">No</label>
       </p>
       <p>
-        <input value="1" class="with-gap" name="mpe_student" type="radio" id="mpe_yes"  />
-        <label for="mpe_yes">Yes</label>
+        <input value="1" class="with-gap" name="mpe_student" type="radio" id="mpe_yes" required data-error="invalid"/>
+        <label for="mpe_yes" >Yes</label>
       </p>
         </div>
   </div>
@@ -212,7 +212,7 @@
   <h3><label>Select Exam Group</label></h3><br>
 
        <p>
-        <input value="1" class="with-gap" name="group_exam1" type="checkbox" id="gamma"/>
+        <input value="1" data-error="invalid" class="with-gap" name="group_exam1" type="checkbox" id="gamma" required />
         <label for="gamma">Gamma (Mind Magic open to all)</label>
   </p>
   </div>
@@ -220,7 +220,7 @@
   <div class="row">
   <div class="input-field col s2"></div><div class="input-field col s8">
 
-      <select name="group_exam_field1" id="exam_group_field1">
+      <select name="group_exam_field1" id="exam_group_field1" data-error="invalid" required>
           <option value="None" disabled selected>Select Exam group</option>
                  <option>1</option>
            <option>2</option>
@@ -235,7 +235,7 @@
 <div class="input-field col s2"></div><div class="input-field col s8">
 
 
-      <input value="1" class="with-gap" name="group_exam2" type="checkbox" id="alpha"/>
+      <input value="1" class="with-gap" name="group_exam2" type="checkbox" id="alpha" data-error="invalid" required />
         <label for="alpha">Alpha Group/Beta Group</label>
 </div>
 </div>    
@@ -243,7 +243,7 @@
     <div class="row">
 <div class="input-field col s2"></div><div class="input-field col s8">
 
-      <select name="group_exam_field2" id="exam_group_field2">
+      <select name="group_exam_field2" id="exam_group_field2" data-error="invalid" required>
           <option value="None" disabled selected>Select Exam group</option>
           <option>1</option>
            <option>2</option>
@@ -267,7 +267,7 @@
         <label for="mpe">MPE School</label>
       </p>
       <p>
-        <input class="with-gap" name="first_school" type="radio" value="1" id="own"  />
+        <input class="with-gap" name="first_school" type="radio" value="1" id="own"  required />
         <label for="own">Own School</label>
       </p>
         </div>
@@ -275,13 +275,13 @@
   <div class="row">
   <div class="input-field col s4">
 
-      <select name="first_prefernce" id="first_prefernce">
+      <select name="first_prefernce" id="first_prefernce" data-error="invalid" required>
           <option value="None" disabled selected>Select School</option>
         {{list_data|safe}}
       </select>
       
     </div>
-  </div>
+  </div></div>
   <!-- ///////////////////////////////////////////////////////////////////////////////////////////// -->
   <!-- ///////////////////////////////////////////////////////////////////////////////////////////// -->
   <div class="row">
@@ -300,24 +300,24 @@
         </div>
   <div class="row">
   <div class="input-field col s4">
-      <select name="second_prefernce" id="second_prefernce">
+      <select name="second_prefernce" id="second_prefernce" data-error="invalid" required>
        <br>
           <option value="None" disabled selected>Select School</option>
         {{list_data|safe}}
       </select>
       
     </div>
-  </div>
+  </div></div>
   <div class="row">
   <div class="input-field col s2"></div><div class="input-field col s8">
   <h3><label>Ineterested in WorkShop :</label></h3><br>
 
        <p>
-        <input value="0" class="with-gap" name="workshop" type="radio" id="workshop_no" required/>
+        <input value="0" class="with-gap" name="workshop" type="radio" id="workshop_no" required data-error="invalid"/>
         <label for="workshop_no">No</label>
       </p>
       <p>
-        <input value="1" class="with-gap" name="workshop" type="radio" id="workshop_yes"  />
+        <input value="1" class="with-gap" name="workshop" type="radio" id="workshop_yes" required data-error="invalid" />
         <label for="workshop_yes">Yes</label>
       </p>
         </div>
@@ -329,8 +329,10 @@
    <button class="btn waves-effect waves-light" id="btnSubmit" type="submit" name="action">Submit
       <i class="material-icons right">send</i>
     </button>
+
     </div>
           </div>
+<div class="row"></div>
       </form>
   </div>
   </div>
@@ -340,6 +342,8 @@
 
       </body>
 
+
+  {% include "base_foot.html" %}
   {% endblock content %}
 
 

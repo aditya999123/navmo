@@ -31,8 +31,11 @@ def registration(request):
 		'login_display':login_display,
 		'login_display2':login_display2,
 		}
-		
 		return HttpResponseRedirect('/logout_and_register/',json)
+	else:
+		login_display='<li><a href="/register">Register</a></li>'
+		login_display2='<li><a href="/login">Login</a></li>'
+		return render(request,'registration/registration.html',{"login_display":login_display,"login_display2":login_display2})
 	if(request.method=="GET"):
 		json={}
 		list_data=''
@@ -203,3 +206,22 @@ def contactus(request):
 		login_display='<li><a href="/register">Register</a></li>'
 		login_display2='<li><a href="/login">Login</a></li>'
 	return render(request,'contactus/contact_us.html',{"login_display":login_display,"login_display2":login_display2})
+
+def overview(request):
+	if request.user.is_authenticated():
+		login_display='<li><a href="/logout">Logout</a></li>'
+		login_display2=''
+	else:
+		login_display='<li><a href="/register">Register</a></li>'
+		login_display2='<li><a href="/login">Login</a></li>'
+	return render(request,'overview/overview.html',{"login_display":login_display,"login_display2":login_display2})
+
+def faqs(request):
+	if request.user.is_authenticated():
+		login_display='<li><a href="/logout">Logout</a></li>'
+		login_display2=''
+	else:
+		login_display='<li><a href="/register">Register</a></li>'
+		login_display2='<li><a href="/login">Login</a></li>'
+	return render(request,'faqs/faqs.html',{"login_display":login_display,"login_display2":login_display2})
+
