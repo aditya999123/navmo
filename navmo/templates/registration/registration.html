@@ -305,6 +305,7 @@
        <br>
           <option value="None" disabled selected>Select School</option>
         {{list_data|safe}}
+      
       </select>
       
     </div>
@@ -330,8 +331,9 @@
   
  <div class="file-field input-field">
       <div class="btn">
-        <span>File</span>
-        <input type="file" name="pic">
+        <span>Upload</span>
+        <input type="file" name="pic" required data-error="Required">
+        
       </div>
       <div class="file-path-wrapper">
         <input class="file-path validate" type="text">
