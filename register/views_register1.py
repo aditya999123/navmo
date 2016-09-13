@@ -32,8 +32,11 @@ def registration(request):
 		'login_display':login_display,
 		'login_display2':login_display2,
 		}
-		
 		return HttpResponseRedirect('/logout_and_register/',json)
+	else:
+		login_display='<li><a href="/register">Register</a></li>'
+		login_display2='<li><a href="/login">Login</a></li>'
+		return render(request,'registration/registration.html',{"login_display":login_display,"login_display2":login_display2})
 	if(request.method=="GET"):
 		json={}
 		list_data=''
@@ -110,7 +113,7 @@ def registration(request):
             flag_exam_centre_2=int(second_choice),
             flag_workshop=int(workshop),
             gender=gender,
-            image=this_refrence_id+'/'+image
+            image=folder+image
             )
 		print user_data.objects.get(refrence_id=this_refrence_id)
 			
@@ -159,7 +162,6 @@ def home(request):
 			return HttpResponseRedirect("/payment/")
 		user_data_row=user_data.objects.get(refrence_id=str(request.user))
 		json={
-		'image':user_data_row.image.url,
 		'refrence_id':user_data_row.refrence_id,
 		'first_name':user_data_row.first_name,
 	    'last_name':user_data_row.last_name,

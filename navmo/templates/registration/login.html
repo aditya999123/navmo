@@ -59,13 +59,15 @@
           <div class="card white darken-1">
             <div class="card-content black-text">
               <span class="card-title black-text" ><h3><center>Navmo - Login</center></h3></span>
-        
+
+<font color="red">{% if form.errors %}Reference Id and password doesnt match.Please Try Again
+        {% endif %}</font>
     <form method="post" action=".">{% csrf_token %}
 
 
             <div class="row">
              
-             <label for="id_username">Referrence Id ( Generated after Registration )</label>
+             <label for="id_username" >Referrence Id ( Generated after Registration )</label>
              {{ form.username }}
            </div>
            <div class="row">
