@@ -84,7 +84,7 @@ DATABASES = {
         'NAME': 'navmo',
         'USER': 'root',
         'PASSWORD': 'Localcart@999123',
-        'HOST': 'www.mpenavmo.com',   # Or an IP Address that your DB is hosted on
+        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
     }
 }
