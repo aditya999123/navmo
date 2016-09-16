@@ -41,7 +41,7 @@
               var confirmPassword = $("#repassword").val();
               var pn = password.length;
               var mn=mobile.value.length;
-              
+              var tsize=$("#tsize").val;
 
               if(firstname==null || firstname== ""){
                 return false;
@@ -58,7 +58,7 @@
               if (pn<6) {
                   alert("length must be 6 or more");
                   document.getElementById('password').focus();
-                  
+                  return false;
               }
               if (password != confirmPassword) {
                   return false;
@@ -67,7 +67,11 @@
                   mn.focus();
                   return false;
               }
-              
+              if(tsize=='null'){
+                //document.getElementById('tsize').focus();
+                alert("Please fill Tee-Shirt Size");
+                return false;
+              }
               return true;
     
 
@@ -145,7 +149,7 @@
         </div>
         <div class="row">
    <div class="input-field col s2"></div><div class="input-field col s8">
-      <select name="gender" required >
+      <select name="gender" required oninvalid="setCustomValidity('Select Gender')">
         <option value="None" disabled selected>Gender</option>
         <option value="male">Male</option>
         <option value="female">Female</option>
@@ -156,8 +160,8 @@
   </div>
   <div class="row">
   <div class="input-field col s2"></div><div class="input-field col s8">
-      <select name="tsize" required >
-        <option value="None" disabled selected>TShirt-Size</option>
+      <select id="tsize" name="tsize" required >
+        <option value='null' disabled selected>TShirt-Size</option>
         <option value="24">24</option>
         <option value="26">26</option>
         <option value="28">28</option>
