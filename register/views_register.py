@@ -78,7 +78,7 @@ def registration(request):
 				os.mkdir(os.path.join(folder))
 				break
 			except:
-				this_refrence_id=this_refrence_id+1
+				this_refrence_id=int(this_refrence_id)+1
 		# full_filename = os.path.join(folder, image)
 		# print "full name",full_filename
 		#fout = open(folder+image, 'wb+')
