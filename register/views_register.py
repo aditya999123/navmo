@@ -60,11 +60,18 @@ def registration(request):
 		exam_group_1=str(request.POST.get('group_exam_field1'))
 		exam_group_2=str(request.POST.get('group_exam_field2'))
 		first_preference=str(request.POST.get('first_preference'))
-		print "\n\n\n\n\1st pref=",str(request.POST.get('first_preference'))
-
 		first_choice=str(request.POST.get('first_school'))
-		second_choice=str(request.POST.get('second_school'))
 		second_preference=str(request.POST.get('second_preference'))
+		second_choice=str(request.POST.get('second_school'))
+
+
+		print "\n\n\n\n\1st pref=",str(request.POST.get('first_preference'))
+		print "\n\n\n\n\1st pref=",str(request.POST.get('first_school'))
+		print "\n\n\n\n\1st pref=",str(request.POST.get('second_preference'))
+		print "\n\n\n\n\1st pref=",str(request.POST.get('second_school'))
+
+
+
 		workshop=str(request.POST.get('workshop'))
 		mpe=str(request.POST.get('mpe_student'))
 		gender=str(request.POST.get('gender'))
@@ -192,7 +199,7 @@ def home(request):
 	    'flag_exam_centre_1':user_data_row.flag_exam_centre_1,
 	    'flag_exam_centre_2':user_data_row.flag_exam_centre_2,
 	    'login_display':login_display,
-	    'ogin_display2':login_display2,
+	    'login_display2':login_display2,
 	    }
 	    #as
 		if(payment_data.objects.get(refrence_id=str(request.user)).flag==1):
