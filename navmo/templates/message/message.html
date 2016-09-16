@@ -24,9 +24,15 @@
     <div class="card horizontal">
       <div class="card-stacked">
         <div class="card-content">
+
+          <p>
+
+{% for message in flash.notice %}
+{{ message|safe }}
+{% endfor %}
         <span class="card-title black-text" ><h3><center>{{message|safe}}</center></h3></span>
 
-        </div>
+</p>        </div>
       </div>
     </div></div>
   </div>

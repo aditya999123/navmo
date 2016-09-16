@@ -18,6 +18,7 @@ from payment.models import payment_data
 import random
 import os
 from .models import exam_center_data
+from django.core.urlresolvers import reverse
 def login_check(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect('/home')
@@ -44,34 +45,40 @@ def registration(request):
 		return render(request,'registration/registration.html',json)
 	if(request.method=="POST"):
 		
-		firstname=request.POST.get('firstname')
-		lastname=request.POST.get('lastname')
-		fathername=request.POST.get('fathername')
-		mothername=request.POST.get('mothername')
-		dob=request.POST.get('dob')
-		gender=request.POST.get('gender')
-		tsize=request.POST.get('tsize')
-		email=request.POST.get('email')
-		pnum=request.POST.get('pnum')
-		address=request.POST.get('address')
-		school=request.POST.get('school')
-		sclass=request.POST.get('class')
-		exam_group_1=request.POST.get('group_exam_field1')
-		exam_group_2=request.POST.get('group_exam_field2')
-		first_prefrence=request.POST.get('first_prefernce')
-		first_choice=request.POST.get('first_school')
-		second_choice=request.POST.get('second_school')
-		second_prefrence=request.POST.get('second_prefernce')
-		workshop=request.POST.get('workshop')
-		mpe=request.POST.get('mpe_student')
-		gender=request.POST.get('gender')
-		flag_group_exam1=request.POST.get('group_exam1')
-		flag_group_exam2=request.POST.get('group_exam2')
+		firstname=str(request.POST.get('firstname'))
+		lastname=str(request.POST.get('lastname'))
+		fathername=str(request.POST.get('fathername'))
+		mothername=str(request.POST.get('mothername'))
+		dob=str(request.POST.get('dob'))
+		gender=str(request.POST.get('gender'))
+		tsize=str(request.POST.get('tsize'))
+		email=str(request.POST.get('email'))
+		pnum=str(request.POST.get('pnum'))
+		address=str(request.POST.get('address'))
+		school=str(request.POST.get('school'))
+		sclass=str(request.POST.get('class'))
+		exam_group_1=str(request.POST.get('group_exam_field1'))
+		exam_group_2=str(request.POST.get('group_exam_field2'))
+		first_prefrence=str(request.POST.get('first_prefernce'))
+		print "\n\n\n\n\1st pref=",str(request.POST.get('first_prefernce'))
+
+		first_choice=str(request.POST.get('first_school'))
+		second_choice=str(request.POST.get('second_school'))
+		second_prefrence=str(request.POST.get('second_prefernce'))
+		workshop=str(request.POST.get('workshop'))
+		mpe=str(request.POST.get('mpe_student'))
+		gender=str(request.POST.get('`gender'))
+		flag_group_exam1=str(request.POST.get('group_exam1'))
+		flag_group_exam2=str(request.POST.get('group_exam2'))
 		image=request.FILES.get('pic').name
 		this_refrence_id=str(int(user_data.objects.all().last().refrence_id)+1)
-		folder = 'media/'+this_refrence_id+'/'
-		os.mkdir(os.path.join(folder))
-		
+		while True:
+			try:
+				folder = 'media/'+this_refrence_id+'/'
+				os.mkdir(os.path.join(folder))
+				break
+			except:
+				this_refrence_id=this_refrence_id+1
 		# full_filename = os.path.join(folder, image)
 		# print "full name",full_filename
 		#fout = open(folder+image, 'wb+')
@@ -137,14 +144,17 @@ def registration(request):
 			domain_type=3
 		payment_data.objects.create(refrence_id=this_refrence_id,flag=0,amount=0,domain_type=domain_type)
 		otp_data.objects.create(refrence_id=this_refrence_id,otp=n,flag=0,number=pnum)
-		return render(request,
-			'message/message.html',
-			{
-			'message':'Please note the refrence id \n this will be used for user login '+str(int(user_data.objects.all().last().refrence_id)),
-			'login_display':login_display,
-			'login_display2':login_display2
-			}
-			)
+		
+		message='Please note the refrence id \n this will be used for user login'+str(this_refrence_id)+' pls login to continue'
+		# ##request.flash['login_display']=login_display
+		# ##request.flash['login_display2']=login_display2
+		# import urllib
+
+		# #url = reverse('/message/', kwargs={'message': message})
+		# print urllib.urlencode(message)
+		# print aditya
+		request.session['message'] = message
+		return HttpResponseRedirect('/message')
 
 @login_required
 def home(request):
@@ -237,3 +247,6 @@ def faqs(request):
 		login_display2='<li><a href="/login">Login</a></li>'
 	return render(request,'faqs/faqs.html',{"login_display":login_display,"login_display2":login_display2})
 
+def message(request):
+	message=request.session['message']
+	return render(request,'message/message.html',{'message':message})
