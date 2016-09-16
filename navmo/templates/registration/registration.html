@@ -30,29 +30,54 @@
       selectMonths: true, // Creates a dropdown to control month
       selectYears: 15 // Creates a dropdown of 15 years to control year
     });
-   $(function () {
-          $("#btnSubmit").click(function () {
+
+  function validate(){
+
+              var firstname=$("#first_name").val();
+              var lastname=$("#last_name").val();
+              var fathersname=$("#fathers_name").val();
+              var mothersname=$("#mothers_name").val();
               var password = $("#password").val();
               var confirmPassword = $("#repassword").val();
               var pn = password.length;
               var mn=mobile.value.length;
-              if (mn!=10) {
-                  alert("Mobile number should be of 10 digits");
-                  return false;
-              }
-              if (pn<6) {
-                  alert("Password should atleast contain 6 letters");
-                  return false;
-              }
-              if (password != confirmPassword) {
-                  alert("Passwords do not match.");
-                  return false;
-              }
-
               
 
-
+              if(firstname==null || firstname== ""){
+                return false;
+              }
+              if(lastname==null || lastname== ""){
+                return false;
+              }
+              if(mothersname==null || mothersname== ""){
+                return false;
+              }
+              if(fathersname==null || fathersname== ""){
+                return false;
+              }
+              if (pn<6) {
+                  alert("length must be 6 or more");
+                  document.getElementById('password').focus();
+                  
+              }
+              if (password != confirmPassword) {
+                  return false;
+              }
+              if (mn!=10) {
+                  mn.focus();
+                  return false;
+              }
+              
               return true;
+    
+
+  }
+
+   $(function () {
+          $("#btnSubmit").click(function () {
+    
+          validate();
+
           });
       });
   </script>
@@ -95,13 +120,13 @@
         </div>
         <div class="row">
           <div class="input-field col s2"></div><div class="input-field col s8">
-            <input id="password" name="password" type="password" class="validate" required>
+            <input id="password" name="password" type="password"  oninvalid="setCustomValidity('Password must be atleast 6 in length')" class="validate" required>
             <label for="password" >Password</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s2"></div><div class="input-field col s8">
-            <input id="repassword" type="password" class="validate" onChange="checkPasswordMatch();" required>
+            <input id="repassword" type="password" class="validate" oninvalid="setCustomValidity('Password do not match!')" onChange="checkPasswordMatch();" required>
             <label  for="repassword">Re-enter Password</label>
           </div>
         </div>
@@ -275,12 +300,12 @@
         
   <div class="row">
   <div class="input-field col s4">
-
+<font color="black">
       <select name="first_prefernce" id="first_prefernce"  required>
           <option value="None" disabled selected>Select School</option>
         {{list_data|safe}}
       </select>
-      
+      </font>
     </div>
   </div></div>
   <!-- ///////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -301,13 +326,15 @@
         </div>
   <div class="row">
   <div class="input-field col s4">
+<font color="black">
+
       <select name="second_prefernce" id="second_prefernce"  required>
        <br>
           <option value="None" disabled selected>Select School</option>
         {{list_data|safe}}
       
       </select>
-      
+</font>      
     </div>
   </div></div>
   <div class="row">
