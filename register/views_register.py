@@ -77,6 +77,15 @@ def registration(request):
 		gender=str(request.POST.get('gender'))
 		flag_group_exam1=str(request.POST.get('group_exam1'))
 		flag_group_exam2=str(request.POST.get('group_exam2'))
+		if(flag_group_exam1 == 'None'){
+		flag_group_exam1='0'
+		}
+		if(flag_group_exam2 == 'None'){
+		flag_group_exam2='0'
+		}
+
+
+
 		image=request.FILES.get('pic').name
 		this_refrence_id=str(int(user_data.objects.all().last().refrence_id)+1)
 		while True:
