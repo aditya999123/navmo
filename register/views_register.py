@@ -59,12 +59,12 @@ def registration(request):
 		sclass=str(request.POST.get('class'))
 		exam_group_1=str(request.POST.get('group_exam_field1'))
 		exam_group_2=str(request.POST.get('group_exam_field2'))
-		first_prefrence=str(request.POST.get('first_prefernce'))
-		print "\n\n\n\n\1st pref=",str(request.POST.get('first_prefernce'))
+		first_preference=str(request.POST.get('first_preference'))
+		print "\n\n\n\n\1st pref=",str(request.POST.get('first_preference'))
 
 		first_choice=str(request.POST.get('first_school'))
 		second_choice=str(request.POST.get('second_school'))
-		second_prefrence=str(request.POST.get('second_prefernce'))
+		second_preference=str(request.POST.get('second_preference'))
 		workshop=str(request.POST.get('workshop'))
 		mpe=str(request.POST.get('mpe_student'))
 		gender=str(request.POST.get('gender'))
@@ -110,8 +110,8 @@ def registration(request):
             address=address,
             school=school,
             grade=sclass,
-            exam_centre_1=first_prefernce,
-            exam_centre_2=second_prefernce,
+            exam_centre_1=first_preference,
+            exam_centre_2=second_preference,
             flag_mpe_student=mpe_flag,
             flag_exam_centre_1=int(first_choice),
             flag_exam_centre_2=int(second_choice),
