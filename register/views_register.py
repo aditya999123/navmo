@@ -136,7 +136,16 @@ def registration(request):
             image=this_refrence_id+'/'+image
             )
 		print user_data.objects.get(refrence_id=this_refrence_id)
-			
+		
+		# Send Reference id to user mobiles
+
+		url='http://api.msg91.com/api/sendhttp.php?authkey=120246AC7mrK6PUjd5794d29c&mobiles='
+		url+=pnum
+		#url+='&message='+'E-Cell team welcomes you. \nVerification code for the app is '+otp
+		url+='&message='+'Thanks for Registring with Navmo - Your Reference id is '+this_refrence_id
+		url+='. It will be used for login '+'&sender=mNavmo&route=4'
+		print requests.request('GET', url)
+				
 
 		User.objects.create_user(
 			username=this_refrence_id,
