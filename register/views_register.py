@@ -56,7 +56,6 @@ def registration(request):
 		examcenter=str(request.POST.get('exam_center'))
 		print examcenter
 		examcenterr=str(request.POST.get('exam_centerr'))
-		print examcenterr
 		email=str(request.POST.get('email'))
 		pnum=str(request.POST.get('pnum'))
 		address=str(request.POST.get('address'))
@@ -153,7 +152,7 @@ def registration(request):
 		payment_data.objects.create(refrence_id=this_refrence_id,flag=0,amount=0,domain_type=domain_type)
 		otp_data.objects.create(refrence_id=this_refrence_id,otp=n,flag=0,number=pnum)
 		
-		message='Please note the refrence id \n this will be used for user login'+str(this_refrence_id)+' pls login to continue'
+		message='Please note the refrence id \n this will be used for user login '+str(this_refrence_id)+'\n <a href="\login" >Please login to continue </a>'
 		# ##request.flash['login_display']=login_display
 		# ##request.flash['login_display2']=login_display2
 		# import urllib
