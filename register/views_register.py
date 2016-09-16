@@ -19,6 +19,7 @@ import random
 import os
 from .models import exam_center_data
 from django.core.urlresolvers import reverse
+import requests
 def login_check(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect('/home')
