@@ -18,6 +18,7 @@ from payment.models import payment_data
 import random
 import os
 from .models import exam_center_data
+from django.core.urlresolvers import reverse
 def login_check(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect('/home')
@@ -69,9 +70,13 @@ def registration(request):
 		flag_group_exam2=request.POST.get('group_exam2')
 		image=request.FILES.get('pic').name
 		this_refrence_id=str(int(user_data.objects.all().last().refrence_id)+1)
-		folder = 'media/'+this_refrence_id+'/'
-		os.mkdir(os.path.join(folder))
-		
+		while True:
+			try:
+				folder = 'media/'+this_refrence_id+'/'
+				os.mkdir(os.path.join(folder))
+				break
+			except:
+				this_refrence_id=this_refrence_id+1
 		# full_filename = os.path.join(folder, image)
 		# print "full name",full_filename
 		#fout = open(folder+image, 'wb+')
@@ -137,14 +142,17 @@ def registration(request):
 			domain_type=3
 		payment_data.objects.create(refrence_id=this_refrence_id,flag=0,amount=0,domain_type=domain_type)
 		otp_data.objects.create(refrence_id=this_refrence_id,otp=n,flag=0,number=pnum)
-		return render(request,
-			'message/message.html',
-			{
-			'message':'Please note the refrence id \n this will be used for user login'+str(int(user_data.objects.all().last().refrence_id)),
-			'login_display':login_display,
-			'login_display2':login_display2
-			}
-			)
+		
+		message='Please note the refrence id \n this will be used for user login'+str(int(user_data.objects.all().last().refrence_id))
+		# ##request.flash['login_display']=login_display
+		# ##request.flash['login_display2']=login_display2
+		# import urllib
+
+		# #url = reverse('/message/', kwargs={'message': message})
+		# print urllib.urlencode(message)
+		# print aditya
+		request.session['message'] = message
+		return HttpResponseRedirect('/message')
 
 @login_required
 def home(request):
@@ -237,3 +245,6 @@ def faqs(request):
 		login_display2='<li><a href="/login">Login</a></li>'
 	return render(request,'faqs/faqs.html',{"login_display":login_display,"login_display2":login_display2})
 
+def message(request):
+	message=request.session['message']
+	return render(request,'message/message.html',{'message':message})

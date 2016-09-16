@@ -11,7 +11,12 @@
     <div class="card horizontal">
       <div class="card-stacked">
         <div class="card-content">
-          <p>{{message|safe}}
+          <p>
+
+{{message|safe}}
+{% for message in flash.notice %}
+{{ message }}
+{% endfor %}
 </p>
         </div>
       </div>
