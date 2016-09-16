@@ -41,6 +41,7 @@ def registration(request):
 		for o in exam_center_data.objects.all():
 			list_data+='<option value="'+o.exam_center+'">'+o.exam_center+'</option>'
 			print o,o.exam_center
+			print list_data
 		json['list_data']=list_data
 		return render(request,'registration/registration.html',json)
 	if(request.method=="POST"):
@@ -52,6 +53,10 @@ def registration(request):
 		dob=str(request.POST.get('dob'))
 		gender=str(request.POST.get('gender'))
 		tsize=str(request.POST.get('tsize'))
+		examcenter=str(request.POST.get('exam_center'))
+		print examcenter
+		examcenterr=str(request.POST.get('exam_centerr'))
+		print examcenterr
 		email=str(request.POST.get('email'))
 		pnum=str(request.POST.get('pnum'))
 		address=str(request.POST.get('address'))
@@ -59,19 +64,15 @@ def registration(request):
 		sclass=str(request.POST.get('class'))
 		exam_group_1=str(request.POST.get('group_exam_field1'))
 		exam_group_2=str(request.POST.get('group_exam_field2'))
-		first_preference=str(request.POST.get('first_preference'))
+		first_preference=str(request.POST.getlist('first'))
+		print 'First '+str(request.POST.get('first'))
+		print str(request.POST.get('second_preference'))
+		print str(request.POST.get('first_school'))
+		print str(request.POST.get('second_school'))
+
 		first_choice=str(request.POST.get('first_school'))
-		second_preference=str(request.POST.get('second_preference'))
 		second_choice=str(request.POST.get('second_school'))
-
-
-		print "\n\n\n\n\1st pref=",str(request.POST.get('first_preference'))
-		print "\n\n\n\n\1st pref=",str(request.POST.get('first_school'))
-		print "\n\n\n\n\1st pref=",str(request.POST.get('second_preference'))
-		print "\n\n\n\n\1st pref=",str(request.POST.get('second_school'))
-
-
-
+		second_preference=str(request.POST.get('second_preference'))
 		workshop=str(request.POST.get('workshop'))
 		mpe=str(request.POST.get('mpe_student'))
 		gender=str(request.POST.get('gender'))
@@ -117,8 +118,8 @@ def registration(request):
             address=address,
             school=school,
             grade=sclass,
-            exam_centre_1=first_preference,
-            exam_centre_2=second_preference,
+            exam_centre_1=examcenter,
+            exam_centre_2=examcenterr,
             flag_mpe_student=mpe_flag,
             flag_exam_centre_1=int(first_choice),
             flag_exam_centre_2=int(second_choice),
@@ -199,7 +200,7 @@ def home(request):
 	    'flag_exam_centre_1':user_data_row.flag_exam_centre_1,
 	    'flag_exam_centre_2':user_data_row.flag_exam_centre_2,
 	    'login_display':login_display,
-	    'login_display2':login_display2,
+	    'ogin_display2':login_display2,
 	    }
 	    #as
 		if(payment_data.objects.get(refrence_id=str(request.user)).flag==1):

@@ -177,6 +177,66 @@
       <label>T-Shirt Size</label>
     </div>
   </div>
+<div class="row">
+  <div class="input-field col s2"></div>
+  <div class="input-field col s4">
+   <h3><label>Select 1<sup>st</sup> Preference</label></h3>
+ <br>
+       <p>
+        <input class="with-gap" name="first_school" type="radio" value="0" id="mpe"  required/>
+        <label for="mpe">MPE School</label>
+      </p>
+      <p>
+        <input class="with-gap" name="first_school" type="radio" value="1" id="own"  required />
+        <label for="own">Own School</label>
+      </p>
+        </div>
+        </div>
+
+  <div class="row">
+  <div class="input-field col s2"></div><div class="input-field col s8">
+      <select id="exam_center" name="exam_center" required >
+        <option value='null' disabled selected>Exam Center 1</option>
+        <option value="Raipur">Raipur</option>
+        <option value="Nagpur">Nagpur</option>
+        <option value="Bhilai">Bhilai</option>
+       
+      </select>
+      <label>Exam Center 1</label>
+    </div>
+  </div>
+
+<div class="row">
+  <div class="input-field col s2"></div>
+  <div class="input-field col s4">
+   <h3><label>Select 2<sup>nd</sup> Preference</label></h3>
+ <br>
+       <p>
+        <input class="with-gap" name="second_school" type="radio" value="0" id="mpe1"  required/>
+        <label for="mpe1">MPE School</label>
+      </p>
+      <p>
+        <input class="with-gap" name="second_school" type="radio" value="1" id="own1"  required />
+        <label for="own1">Own School</label>
+      </p>
+        </div>
+        </div>
+
+  <div class="row">
+  <div class="input-field col s2"></div><div class="input-field col s8">
+      <select id="exam_centerr" name="exam_centerr" required >
+        <option value='null' disabled selected>Exam Center 2</option>
+        <option value="Raipur">Raipur</option>
+        <option value="Nagpur">Nagpur</option>
+        <option value="Bhilai">Bhilai</option>
+       
+      </select>
+      <label>Exam Center 2</label>
+    </div>
+  </div>
+
+
+  
   <div class="row">
           <div class="input-field col s2"></div><div class="input-field col s8">
             <input name="address" id="address" type="text" class="validate" required >
@@ -295,11 +355,16 @@
         
   </div>
 
-  <div class="row">
+ <!-- 
+
+  This code belong to old center choice thing that was causing errors.
+
+
+  <div class="row" hidden>
   <div class="input-field col s2"></div>
   <div class="input-field col s4">
-  <!-- <h3><label>Select 1<sup>st</sup> Preference</label></h3>
- -->
+  <h3><label>Select 1<sup>st</sup> Preference</label></h3>
+
        <p>
         <input class="with-gap" name="first_school" type="radio" value="0" id="mpe"  required/>
         <label for="mpe">MPE School</label>
@@ -309,24 +374,15 @@
         <label for="own">Own School</label>
       </p>
         </div>
-        
-  <div class="row">
-  <div class="input-field col s4">
-<font color="black">
-      <select name="first_preference" id="first_preference"  required>
-          <option value="None" disabled selected>Select School</option>
-        {{list_data|safe}}
-      </select>
-      </font>
-    </div>
-  </div></div>
+        </div>
+  -->
   <!-- ///////////////////////////////////////////////////////////////////////////////////////////// -->
   <!-- ///////////////////////////////////////////////////////////////////////////////////////////// -->
-  <div class="row">
+  <!-- <div class="row">
   <div class="input-field col s2"></div>
   <div class="input-field col s4">
-  <!-- <h3><label>Select 2<sup>nd</sup> Preference</label></h3>
- -->
+   <h3><label>Select 2<sup>nd</sup> Preference</label></h3>
+ 
        <p>
         <input class="with-gap" name="second_school" value="0" type="radio" id="mpe2"  required/>
         <label for="mpe2">MPE School</label>
@@ -343,13 +399,15 @@
       <select name="second_preference" id="second_preference"  required>
        <br>
           <option value="None" disabled selected>Select School</option>
-        {{list_data|safe}}
+          <option value="Raipur">Raipur</option>
+          <option value="Nagpur">Nagpur</option>
+          <option value="Pune">Pune</option>
       
       </select>
 </font>      
     </div>
   </div></div>
-  <div class="row">
+   --><div class="row">
   <div class="input-field col s2"></div><div class="input-field col s8">
   <h3><label>Ineterested in WorkShop :</label></h3><br>
 
