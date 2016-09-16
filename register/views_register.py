@@ -144,7 +144,7 @@ def registration(request):
 		url+=pnum
 		#url+='&message='+'E-Cell team welcomes you. \nVerification code for the app is '+otp
 		url+='&message='+'Thanks for Registring with Navmo - Your Reference id is '+this_refrence_id
-		url+='. It will be used for login '+'&sender=mNavmo&route=4'
+		url+='. It will be used for login anytime with your password. :)'+'&sender=mNavmo&route=4'
 		print requests.request('GET', url)
 				
 
