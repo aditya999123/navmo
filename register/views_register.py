@@ -48,41 +48,65 @@ def registration(request):
 	if(request.method=="POST"):
 		
 		firstname=str(request.POST.get('firstname'))
+		print firstname
 		lastname=str(request.POST.get('lastname'))
+		print lastname
 		fathername=str(request.POST.get('fathername'))
+		print fathername
 		mothername=str(request.POST.get('mothername'))
+		print mothername
 		dob=str(request.POST.get('dob'))
+		print dob
 		gender=str(request.POST.get('gender'))
+		print gender
 		tsize=str(request.POST.get('tsize'))
+		print tsize
 		examcenter=str(request.POST.get('exam_center'))
 		print examcenter
 		examcenterr=str(request.POST.get('exam_centerr'))
+		print examcenterr
 		email=str(request.POST.get('email'))
+		print email
 		pnum=str(request.POST.get('pnum'))
+		print pnum
 		address=str(request.POST.get('address'))
+		print address
 		school=str(request.POST.get('school'))
+		print school
 		sclass=str(request.POST.get('class'))
+		print sclass
 		exam_group_1=str(request.POST.get('group_exam_field1'))
+		print exam_group_1
 		exam_group_2=str(request.POST.get('group_exam_field2'))
+		print exam_group_2
 		first_preference=str(request.POST.getlist('first'))
+		print first_preference
 		print 'First '+str(request.POST.get('first'))
 		print str(request.POST.get('second_preference'))
 		print str(request.POST.get('first_school'))
 		print str(request.POST.get('second_school'))
 
 		first_choice=str(request.POST.get('first_school'))
+		print first_choice
 		second_choice=str(request.POST.get('second_school'))
+		print second_choice
 		second_preference=str(request.POST.get('second_preference'))
+		print second_preference
 		workshop=str(request.POST.get('workshop'))
+		print workshop
 		mpe=str(request.POST.get('mpe_student'))
+		print mpe
 		gender=str(request.POST.get('gender'))
+		print gender
 		flag_group_exam1=str(request.POST.get('group_exam1'))
+		print flag_group_exam1
 		flag_group_exam2=str(request.POST.get('group_exam2'))
+		print flag_group_exam2
 		if flag_group_exam1 == 'None':
-				flag_group_exam1='0'
+			flag_group_exam1='0'
 		
 		if flag_group_exam2 == 'None':
-				flag_group_exam2='0'
+			flag_group_exam2='0'
 		
 
 
@@ -140,7 +164,7 @@ def registration(request):
 		
 		# Send Reference id to user mobiles
 
-		url='http://api.msg91.com/api/sendhttp.php?authkey=120246AC7mrK6PUjd5794d29c&mobiles='
+		url='http://api.msg91.com/api/sendhttp.php?authkey=125195AvX4LUlVf57dcd941&mobiles='
 		url+=pnum
 		#url+='&message='+'E-Cell team welcomes you. \nVerification code for the app is '+otp
 		url+='&message='+'Thanks for Registring with Navmo - Your Reference id is '+this_refrence_id

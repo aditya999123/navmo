@@ -25,6 +25,169 @@
   <script type="text/javascript">
     $(document).ready(function() {
       $('select').material_select();
+//Validation for form
+      var error = 0;
+
+      $("#password").focusout(function() {
+          
+          if($("#password").val().length < 6) {
+              $('#password_error').html("Password should be atleast 6 characters long.");
+              $("#password_error").show();
+              error++;
+
+          } else { $("#password_error").hide(); }
+
+      });
+
+      $("#repassword").focusout(function() {
+          
+          if($("#repassword").val() != $("#password").val()) {
+              $('#repassword_error').html("Password doesn't match.");
+              $("#repassword_error").show();
+              error++;
+
+          } else { $("#repassword_error").hide(); }
+
+      });
+
+
+      $("#first_name").focusout(function() {
+
+        if($("#first_name").val().length == 0 ) {
+
+        $('#first_name_error').html("Firstname should not be empty.");
+              $("#first_name_error").show();
+              error++;
+
+      } else {  $("#first_name_error").hide();}
+      
+      } );
+
+      $("#last_name").focusout(function() {
+
+        if($("#last_name").val().length == 0 ) {
+
+        $('#last_name_error').html("Lastname should not be empty.");
+              $("#last_name_error").show();
+              error++;
+
+      } else {  $("#last_name_error").hide();}
+      
+      } );
+
+
+      $("#fathers_name").focusout(function() {
+
+        if($("#fathers_name").val().length == 0 ) {
+
+        $('#fathers_name_error').html("Father's name should not be empty.");
+              $("#fathers_name_error").show();
+              error++;
+      } else {  $("#fathers_name_error").hide();}
+      
+      } );
+
+      $("#mothers_name").focusout(function() {
+
+        if($("#mothers_name").val().length == 0 ) {
+
+        $('#mothers_name_error').html("Mother's name should not be empty.");
+              $("#mothers_name_error").show();
+              error++;
+      } else {  $("#mothers_name_error").hide();}
+      
+      } );
+
+      $("#email").focusout(function() {
+
+        if($("#email").val().length == 0 ) {
+
+        $('#email_error').html("Email should not be empty.");
+              $("#email_error").show();
+              error++;
+      } else {  $("#email_error").hide();}
+      
+      } );
+
+       $("#mobile").focusout(function() {
+
+        if($("#mobile").val().length == 0 ) {
+
+        $('#mobile_error').html("Mobile should not be empty.");
+              $("#mobile_error").show();
+              error++;
+      } else {  $("#mobile_error").hide();}
+      
+      } );
+
+        $("#gender").focusout(function() {
+
+        if($("#gender").val().length == 0 ) {
+
+        $('#gender_error').html("Select gender.");
+              $("#gender_error").show();
+              error++;
+      } else {  $("#gender_error").hide();}
+      
+      } );
+
+         $("#tsize").focusout(function() {
+
+        if($("#tsize").val().length == 0 ) {
+
+        $('#tsize_error').html("Select tshirt size.");
+              $("#tsize_error").show();
+              error++;
+      } else {  $("#tsize_error").hide();}
+      
+      } );
+
+          $("#address").focusout(function() {
+
+        if($("#address").val().length == 0 ) {
+
+        $('#adress_error').html("Please provide address.");
+              $("#adress_error").show();
+              error++;
+      } else {  $("#adress_error").hide();}
+      
+      } );
+
+           $("#dob").focusout(function() {
+
+        if($("#dob").val().length == 0 ) {
+
+        $('#dob_error').html("Please insert DOB.");
+              $("#dob_error").show();
+              error++;
+      } else {  $("#dob_error").hide();}
+      
+      } );
+            $("#schoolname").focusout(function() {
+
+        if($("#schoolname").val().length == 0 ) {
+
+        $('#school_error').html("Please provide school name.");
+              $("#school_error").show();
+              error++;
+      } else {  $("#school_error").hide();}
+      
+      } );
+
+
+            $("#btnSubmit").click(function(e) {
+             if(validate()==false)
+                 e.preventDefault();
+              
+
+
+            });
+
+
+
+
+
+
     });
     $('.datepicker').pickadate({
       selectMonths: true, // Creates a dropdown to control month
@@ -33,17 +196,20 @@
 
   function validate(){
 
+
+
               var firstname=$("#first_name").val();
               var lastname=$("#last_name").val();
               var fathersname=$("#fathers_name").val();
               var mothersname=$("#mothers_name").val();
               var password = $("#password").val();
               var confirmPassword = $("#repassword").val();
-              var pn = password.length;
+              var pn = $("#password").val().length;
               var mn=mobile.value.length;
               var tsize=$("#tsize").val;
 
               if(firstname==null || firstname== ""){
+                
                 return false;
               }
               if(lastname==null || lastname== ""){
@@ -56,19 +222,20 @@
                 return false;
               }
               if (pn<6) {
-                  alert("length must be 6 or more");
-                  document.getElementById('password').focus();
+                  document.registration_form.password.focus();
+                
                   return false;
               }
               if (password != confirmPassword) {
+                  document.registration_form.confirmPassword.focus();
                   return false;
               }
               if (mn!=10) {
-                  mn.focus();
+                  document.registration_form.pnum.focus();
                   return false;
               }
               if(tsize=='null'){
-                //document.getElementById('tsize').focus();
+
                 alert("Please fill Tee-Shirt Size");
                 return false;
               }
@@ -77,13 +244,7 @@
 
   }
 
-   $(function () {
-          $("#btnSubmit").click(function () {
-    
-          validate();
 
-          });
-      });
   </script>
 
   <div class="row">
@@ -94,7 +255,7 @@
                 <span class="card-title black-text" ><h3><center>Navmo - Registration</center></h3></span>
 
 
-      <form black-text action="." method="post"  enctype="multipart/form-data">{% csrf_token %}
+      <form id="registration_form" black-text action="." method="post"  enctype="multipart/form-data">{% csrf_token %}
                 
            
 
@@ -102,50 +263,50 @@
           <div class="input-field col s2"></div><div class="input-field col s8">
             <input  name="firstname" id="first_name" type="text" class="validate" required>
              <label for="first_name" >First Name</label>
-        </div>
+        </div><div id="first_name_error"></div>
         </div>
         <div class="row">
           <div class="input-field col s2"></div><div class="input-field col s8">
             <input id="last_name" name="lastname" type="text" class="validate" required>
             <label for="last_name" >Last Name</label>
-          </div>
+          </div><div id="last_name_error"></div>
         </div>
         <div class="row">
           <div class="input-field col s2"></div><div class="input-field col s8">
             <input id="fathers_name" name="fathername" type="text" class="validate" required>
             <label for="fathers_name" >Father's Name</label>
-          </div>
+          </div><div id="fathers_name_error"></div>
         </div>
         <div class="row">
           <div class="input-field col s2"></div><div class="input-field col s8">
             <input id="mothers_name" name="mothername" type="text" class="validate" required>
             <label for="mothers_name" >Mother's Name</label>
-          </div>
+          </div><div id="mothers_name_error"></div>
         </div>
         <div class="row">
           <div class="input-field col s2"></div><div class="input-field col s8">
-            <input id="password" name="password" type="password"  oninvalid="setCustomValidity('Password must be atleast 6 in length')" class="validate" required>
+            <input id="password" name="password" type="password" class="validate" required>
             <label for="password" >Password</label>
-          </div>
+          </div><div id="password_error"></div>
         </div>
         <div class="row">
           <div class="input-field col s2"></div><div class="input-field col s8">
-            <input id="repassword" type="password" class="validate" oninvalid="setCustomValidity('Password do not match!')" onChange="checkPasswordMatch();" required>
+            <input id="repassword" type="password" required>
             <label  for="repassword">Re-enter Password</label>
-          </div>
+          </div><div id="repassword_error"></div>
         </div>
         <div id="divCheckPasswordMatch"></div>
         <div class="row">
           <div class="input-field col s2"></div><div class="input-field col s8">
             <input id="email" type="email" name="email" class="validate" required>
             <label for="email" >Email</label>
-          </div>
+          </div><div id="email_error"></div>
         </div>
            <div class="row">
           <div class="input-field col s2"></div><div class="input-field col s8">
             <input id="mobile" type="number" name="pnum" class="validate" required>
             <label for="mobile" >Mobile:</label>
-          </div>
+          </div><div id="mobile_error"></div>
         </div>
         <div class="row">
    <div class="input-field col s2"></div><div class="input-field col s8">
@@ -156,7 +317,7 @@
         
       </select>
       <label>Gender</label>
-    </div>
+    </div><div id="gender_error"></div>
   </div>
   <div class="row">
   <div class="input-field col s2"></div><div class="input-field col s8">
@@ -175,7 +336,7 @@
 
       </select>
       <label>T-Shirt Size</label>
-    </div>
+    </div><div id="tsize_error"></div>
   </div>
 <div class="row">
   <div class="input-field col s2"></div>
@@ -183,7 +344,7 @@
    <h3><label>Select 1<sup>st</sup> Preference</label></h3>
  <br>
        <p>
-        <input class="with-gap" name="first_school" type="radio" value="0" id="mpe"  required/>
+        <input class="with-gap" name="first_school" type="radio" value="0" id="mpe" checked required/>
         <label for="mpe">MPE School</label>
       </p>
       <p>
@@ -212,7 +373,7 @@
    <h3><label>Select 2<sup>nd</sup> Preference</label></h3>
  <br>
        <p>
-        <input class="with-gap" name="second_school" type="radio" value="0" id="mpe1"  required/>
+        <input class="with-gap" name="second_school" type="radio" value="0" id="mpe1" checked required/>
         <label for="mpe1">MPE School</label>
       </p>
       <p>
@@ -291,7 +452,7 @@
         <label for="mpe_no">No</label>
       </p>
       <p>
-        <input value="1" class="with-gap" name="mpe_student" type="radio" id="mpe_yes" required />
+        <input value="1" class="with-gap" name="mpe_student" type="radio" id="mpe_yes" checked required />
         <label for="mpe_yes" >Yes</label>
       </p>
         </div>
@@ -299,10 +460,10 @@
 
   <div class="row">
   <div class="input-field col s2"></div><div class="input-field col s8">
-  <h3><label>Select Exam Group</label></h3><br>
+  <h3><label>Select Exam Group</label></h3><br><div id="exam_group_error"></div>
 
        <p>
-        <input value="1"  class="with-gap" name="group_exam1" type="checkbox" id="gamma"/>
+        <input class="with-gap" name="group_exam1" type="checkbox" value="1" id="gamma"/>
         <label for="gamma">Gamma (Mind Magic open to all)</label>
   </p>
   </div>
@@ -328,7 +489,7 @@
 <div class="input-field col s2"></div><div class="input-field col s8">
 
 
-      <input value="1" class="with-gap" name="group_exam2" type="checkbox" id="alpha"/>
+      <input class="with-gap" name="group_exam2" type="checkbox" value="1" id="alpha"/>
         <label for="alpha">Alpha Group/Beta Group</label>
 </div>
 </div>    
@@ -416,7 +577,7 @@
         <label for="workshop_no">No</label>
       </p>
       <p>
-        <input value="1" class="with-gap" name="workshop" type="radio" id="workshop_yes" required  />
+        <input value="1" class="with-gap" name="workshop" type="radio" id="workshop_yes" checked required  />
 
         <label for="workshop_yes">Yes</label>
       </p>
@@ -429,7 +590,7 @@
   <div class="file-field input-field" black>
       <div class="btn">
         <span>Upload Image</span>
-        <input type="file" name="pic" accept="image/*">
+        <input type="file" name="pic" accept="image/*" required>
       </div>
       <font color="black">
       <div blue class="file-path-wrapper">

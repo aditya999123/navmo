@@ -38,7 +38,7 @@ def verify_mobile(request):
 			setattr(otp_data_row,'otp',n)
 			otp_data_row.save()
 			
-			url='http://api.msg91.com/api/sendhttp.php?authkey=120246AC7mrK6PUjd5794d29c&mobiles='
+			url='http://api.msg91.com/api/sendhttp.php?authkey=125195AvX4LUlVf57dcd941&mobiles='
 			url+=str(otp_data_row.number)
 			#url+='&message='+'E-Cell team welcomes you. \nVerification code for the app is '+otp
 			url+='&message='+'Verification code is '+str(n)
