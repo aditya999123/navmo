@@ -30,6 +30,7 @@ def registration(request):
 	if request.user.is_authenticated():
 		login_display='<li><a href="/logout">Logout</a></li>'
 		login_display2=''
+		
 		json={
 		'login_display':login_display,
 		'login_display2':login_display2,

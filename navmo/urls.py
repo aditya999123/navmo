@@ -19,6 +19,9 @@ from register.views_register import faqs,overview,registration,home,login_check,
 from register.views_register import logout_and_register,message
 from otp.views import verify_mobile
 from payment.views import payment,payment_faliure,payment_success
+from forgot_password.views import forgot_password
+from change_password.views import change_password
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$',start),
@@ -36,7 +39,10 @@ urlpatterns = [
     url(r'^overview/$',overview),
     url(r'^faqs/$',faqs),
     url(r'^message/$',message),
-
+    url(r'^forgot_password/$',forgot_password),
+    url(r'^change_password/$',change_password),
+    
+    
 ]
 from django.conf import settings
 from django.conf.urls.static import static
