@@ -20,7 +20,6 @@ def forgot_password(request):
 				refrence_id=request.POST.get('reference_id')
 				print refrence_id
 				otp=randint(99999,999999)
-				otp=4444
 				try:
 					user=password_reset_otp.objects.get(refrence_id=refrence_id)
 					setattr(user,'otp',otp)
@@ -41,7 +40,7 @@ def forgot_password(request):
 				#url+='&message='+'E-Cell team welcomes you. \nVerification code for the app is '+otp
 				url+='&message= Hello '+user_data_all.first_name+' Your otp for password reset is '+str(otp)+' and reference id is '+refrence_id
 				url+='.'+'&sender=mNavmo&route=4'
-				#print requests.request('GET',url)
+				print requests.request('GET',url)
 
 
 				login_display='<li><a href="/register">Register</a></li>'
