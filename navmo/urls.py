@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from register.views_register import faqs,overview,registration,home,login_check,logout_page,start,contactus
-from register.views_register import logout_and_register,message
+from register.views_register import logout_and_register,message,syllabus
 from otp.views import verify_mobile
 from payment.views import payment,payment_faliure,payment_success
 from forgot_password.views import forgot_password
@@ -39,6 +39,7 @@ urlpatterns = [
     url(r'^faqs/$',faqs),
     url(r'^message/$',message),
     url(r'^forgot_password/$',forgot_password),
+    url(r'^syllabus/$',syllabus),
     
     
 ]

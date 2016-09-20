@@ -288,6 +288,15 @@ def overview(request):
 		login_display='<li><a href="/register">Register</a></li>'
 		login_display2='<li><a href="/login">Login</a></li>'
 	return render(request,'overview/overview.html',{"login_display":login_display,"login_display2":login_display2})
+def syllabus(request):
+	if request.user.is_authenticated():
+		login_display='<li><a href="/logout">Logout</a></li>'
+		login_display2=''
+	else:
+		login_display='<li><a href="/register">Register</a></li>'
+		login_display2='<li><a href="/login">Login</a></li>'
+	return render(request,'syllabus/syllabus.html',{"login_display":login_display,"login_display2":login_display2})	
+
 
 def faqs(request):
 	if request.user.is_authenticated():
