@@ -39,7 +39,7 @@ urlpatterns = [
     url(r'^faqs/$',faqs),
     url(r'^message/$',message),
     url(r'^forgot_password/$',forgot_password),
-    url(r'^syllabus/$',syllabus),
+  #  url(r'^syllabus/$',syllabus),
     
     
 ]
