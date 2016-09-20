@@ -187,12 +187,20 @@ def registration(request):
 			login_display2='<li><a href="/login">Login</a></li>'
 
 		n=random.randint(1000,9999)
+		
 		if ((int(flag_group_exam1)==1)and(int(flag_group_exam2)==0)):
 			domain_type=1
 		if ((int(flag_group_exam1)==0)and(int(flag_group_exam2)==1)):
 			domain_type=2
 		if ((int(flag_group_exam1)==1)and(int(flag_group_exam2)==1)):
 			domain_type=3
+		if ((int(flag_group_exam1)==1)and(int(flag_group_exam2)==0)and(int(workshop))):
+			domain_type=4
+		if ((int(flag_group_exam1)==0)and(int(flag_group_exam2)==1)and(int(workshop))):
+			domain_type=5
+		if ((int(flag_group_exam1)==1)and(int(flag_group_exam2)==1)and(int(workshop))):
+			domain_type=6
+
 		payment_data.objects.create(refrence_id=this_refrence_id,flag=0,amount=0,domain_type=domain_type)
 		otp_data.objects.create(refrence_id=this_refrence_id,otp=n,flag=0,number=pnum)
 		
