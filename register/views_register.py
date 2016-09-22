@@ -20,6 +20,9 @@ import os
 from .models import exam_center_data
 from django.core.urlresolvers import reverse
 import requests
+from django.core.mail import send_mail
+
+
 def login_check(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect('/home')
@@ -172,6 +175,14 @@ def registration(request):
 		url+='. It will be used for login anytime with your password. :)'+'&sender=mNavmo&route=4'
 		print requests.request('GET', url)
 				
+		send_mail(
+    	'New Registration',
+    	'Someone has registered in the Navmo website',
+    	'server@mpenavmo.com',
+    	['m3gh4l@gmail.com'],
+    	fail_silently=False,
+		)
+
 
 		User.objects.create_user(
 			username=this_refrence_id,
