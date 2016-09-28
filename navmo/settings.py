@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '-pvvmb(2t%tfvxhkqftpt%u4&bihrow!+ic9&$3k42yi_lmtg='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['139.59.17.151','mpenavmo.com','www.mpenavmo.com']
+ALLOWED_HOSTS = []#'139.59.17.151','mpenavmo.com','www.mpenavmo.com','www.mpenavmo.com/static','mpenavmo.com/static']
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
