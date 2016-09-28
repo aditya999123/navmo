@@ -73,12 +73,13 @@ def payment(request):
 		json['login_display2']=login_display2,
 		return render(request,'payment/payment.html',json)
 	else:
-		url='https://www.payumoney.com/payment/payment/chkMerchantTxnStatus?'
+		url='https://www.payumoney.com/payment/payment/chkMerchantTxnStatus'
+		#####https://www.payumoney.com/payment/payment/chkMerchantTxnStatus?merchantKey=JBZaLc&merchantTransactionIds=1
 		key='YSLeH0'
 		txnid=payment_data_row.last_transaction_id
 		json_sent={
-		'merchantTransactionIds':txnid,
-		'merchantKey':key
+		'merchantTransactionIds':str(txnid),
+		'merchantKey':str(key)
 		}
 		
 		head={"Authorization": "Egmegr2N2HD0Y7rBRcU3GQRuzMH9BZ0z05HZIkex/lo="}
