@@ -25,7 +25,7 @@ SECRET_KEY = '-pvvmb(2t%tfvxhkqftpt%u4&bihrow!+ic9&$3k42yi_lmtg='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['139.59.17.151']
+ALLOWED_HOSTS = ['139.59.17.151','mpenavmo.com','www.mpenavmo.com']
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
