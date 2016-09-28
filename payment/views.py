@@ -77,6 +77,7 @@ def payment(request):
 		#####https://www.payumoney.com/payment/payment/chkMerchantTxnStatus?merchantKey=JBZaLc&merchantTransactionIds=1
 		key='YSLeH0'
 		txnid=payment_data_row.last_transaction_id
+		print txnid
 		json_sent={
 		'merchantTransactionIds':str(txnid),
 		'merchantKey':str(key)
