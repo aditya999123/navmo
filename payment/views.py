@@ -98,7 +98,11 @@ def payment(request):
 @login_required
 @csrf_exempt
 def payment_success(request):
-	status=request.POST["status"]
+	
+	for key, value in request.POST.items():
+		print(key, value)
+		
+	status=request.POST["Status"]
 	firstname=request.POST["firstname"]
 	amount=request.POST["amount"]
 	txnid=request.POST["txnid"]
