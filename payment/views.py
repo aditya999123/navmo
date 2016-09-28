@@ -101,15 +101,15 @@ def payment_success(request):
 	
 	for key, value in request.POST.items():
 		print(key, value)
-		
-	status=request.POST["Status"]
-	firstname=request.POST["firstname"]
-	amount=request.POST["amount"]
-	txnid=request.POST["txnid"]
-	posted_hash=request.POST["hash"]
-	key=request.POST["key"]
-	productinfo=request.POST["productinfo"]
-	email=request.POST["email"]
+
+	status=str(request.POST["status"])
+	firstname=str(request.POST["firstname"])
+	amount=str(request.POST["amount"])
+	txnid=str(request.POST["txnid"])
+	posted_hash=str(request.POST["hash"])
+	key=str(request.POST["key"])
+	productinfo=str(request.POST["productinfo"])
+	email=str(request.POST["email"])
 	salt="wErVRybo"
 	try:
 		additionalCharges=request.POST["additionalCharges"]
@@ -128,7 +128,7 @@ def payment_success(request):
 		login_display='<li><a href="/register">Register</a></li>'
 		login_display2='<li><a href="/login">Login</a></li>'
 
-	if(status==1):
+	if(status=="success"):
 		setattr(payment_data_row,'flag',1)
 		payment_data_row.save()	
 	return render(request,'payment/success.html',{"txnid":txnid,"status":status,"amount":amount,"login_display":login_display,"login_display2":login_display2})
