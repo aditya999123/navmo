@@ -84,7 +84,7 @@ def payment(request):
 		}
 		
 		head={"Authorization": "Egmegr2N2HD0Y7rBRcU3GQRuzMH9BZ0z05HZIkex/lo="}
-		result=requests.request('post',url,json=json_sent,headers=head)
+		result=requests.request('get',url,json=json_sent,headers=head)
 		
 		if request.user.is_authenticated():
 			login_display='<li><a href="/logout">Logout</a></li>'
