@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '-pvvmb(2t%tfvxhkqftpt%u4&bihrow!+ic9&$3k42yi_lmtg='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['139.59.17.151']
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -124,6 +124,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
 
 import django.contrib.auth
 django.contrib.auth.LOGIN_URL = '/login'

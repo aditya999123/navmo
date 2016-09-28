@@ -174,14 +174,15 @@ def registration(request):
 		url+='&message='+'Thanks for Registring with Navmo - Your Reference id is '+this_refrence_id
 		url+='. It will be used for login anytime with your password. :)'+'&sender=mNavmo&route=4'
 		print requests.request('GET', url)
+		
+		url='http://api.msg91.com/api/sendhttp.php?authkey=125195AvX4LUlVf57dcd941&mobiles='
+		url+='8446019312'
+		#url+='&message='+'E-Cell team welcomes you. \nVerification code for the app is '+otp
+		url+='&message='+'New User Registered With Navmo with Reference id is '+this_refrence_id
+		url+='.'+'&sender=mNavmo&route=4'
+		print requests.request('GET', url)
 				
-		send_mail(
-    	'New Registration',
-    	'Someone has registered in the Navmo website',
-    	'server@mpenavmo.com',
-    	['m3gh4l@gmail.com'],
-    	fail_silently=False,
-		)
+		
 
 
 		User.objects.create_user(
